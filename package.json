@@ -45,6 +45,6 @@
     "image-to-blob": "^0.2.0",
     "point-in-polygon": "^1.0.1",
     "robust-point-in-polygon": "^1.0.3",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   }
 }
