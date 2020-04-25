@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        
+        #map {
+            /* height: 900px;
+            width: 900px; */
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            /* margin-top: 50px; */
+            /* top: 0px; */
+            /* bottom: 0px; */
+            /* right: 0px; */
+            /* left: 0px; */
+        }
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .bg {
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 40px;
+            height: 414.75px;
+            width: 600px;
+        }
+        
+        .btnnn2 {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 120px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            /* display: block; */
+            margin-left: 50px;
+            /* transform: translateX(-50%); */
+            /* margin-bottom: 30px; */
+        }
+        
+        .btnnn2:hover {
+            background-color: #212e1e;
+        }
+        
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #939723;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+        
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+        
+        .point {
+            border: 1px solid white;
+            border-radius: 20px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src=""></script>
+
+</head>
+
+<body onload="onPageAppear()" background="./assets/background.jpg" style="overflow: hidden;">
+
+    <script src="js/canvas2image.js"></script>
+
+    <div id="bgg" class="bg" style=" position: relative;">
+
+
+        <img id="mapImg" style="width: 100%;height: 100%;position: absolute;" src="C:/ivora-data/map.png">
+
+        <canvas id="myCanvas" style=" height: 400px;width: 584px;position: absolute;border:1px solid #d3d3d3;"></canvas>
+    </div>
+
+
+    <div id="submit" style="text-align:center; margin-top: 55px;">
+        <div style="position:relative; transform: translateX(-32px);">
+            <!-- <button id="gotoPreviousPage" class="btnnn2 ">MARK</button> -->
+            <button id="gotoMapPage" onclick="clearDeadZone()" class="btnnn2 ">CLEAR</button>
+            <button id="gotoDashBoardPage" onclick="saveDeadZone()" class="btnnn2 ">SUBMIT</button>
+        </div>
+
+
+    </div>
+
+
+    <div style="display: none" id="loader"></div>
+
+    <script>
+        let pointsArray = [];
+        let clickedCount = 0;
+        var ctx;
+        var c;
+        let assetZoneAreaVal;
+
+
+        function onPageAppear() {
+            assetZoneAreaVal = JSON.parse(localStorage.getItem('assetzone'));
+            // console.log(assetZoneAreaVal);
+
+            if (assetZoneAreaVal) {
+                // console.log('ok');
+
+                let c = document.getElementById("myCanvas");
+                // // // // // console.log(c);
+
+                ctx = c.getContext("2d");
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+                // context = canvas.context2d;    
+                ctx.translate(0.5, 0.5);
+
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(299, 149);
+                for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+                    // // // console.log(assetZoneAreaVal[i].xVal, assetZoneAreaVal[i].yVal);
+
+
+
+                    ctx.moveTo(assetZoneAreaVal[i].xVal, assetZoneAreaVal[i].yVal);
+
+
+                    ctx.lineTo(assetZoneAreaVal[i + 1].xVal, assetZoneAreaVal[i + 1].yVal);
+
+
+                    ctx.stroke();
+
+
+                }
+
+
+            } else {
+                // console.log('fsf');
+
+            }
+
+        }
+
+
+        document.getElementById('myCanvas').onclick = function drawPoint(evt) {
+            clickedCount++;
+            // console.log(clickedCount);
+
+
+            // console.log('xdfvdxgxdgsdgsdgsdgs', evt);
+            var x = evt.pageX - $('#myCanvas').offset().left;
+            var y = evt.pageY - $('#myCanvas').offset().top;
+
+            // console.log(x, y);
+            pointsArray.push({
+                x,
+                y,
+                'xVal': x * (300 / 584),
+                'yVal': y * (150 / 400)
+            });
+
+
+            let point = document.createElement('div');
+            point.style.position = "absolute";
+            point.className = 'point';
+            point.id = 'point' + clickedCount;
+            point.style.marginLeft = x + "px";
+            point.style.marginTop = y + "px";
+            // console.log(point.style.marginLeft);
+
+            document.getElementById('bgg').appendChild(point);
+
+            if (clickedCount > 1) {
+                makeLine(clickedCount);
+
+            }
+
+
+        }
+
+        function makeLine(clickedCount) {
+            // console.log('fsdfsfefsefwef');
+
+
+            let firstPoint = pointsArray[clickedCount - 2];
+            let finalPoint = pointsArray[clickedCount - 1];
+            // console.log(firstPoint, finalPoint);
+
+
+            c = document.getElementById("myCanvas");
+            // // console.log(c);
+
+            ctx = c.getContext("2d");
+            ctx.strokeStyle = 'blue';
+            ctx.beginPath();
+
+            // ctx.moveTo(0, 0);
+            // ctx.lineTo(299, 149);
+            ctx.moveTo(firstPoint.xVal, firstPoint.yVal);
+            ctx.lineTo(finalPoint.xVal, finalPoint.yVal);
+            ctx.stroke();
+
+
+        }
+
+        function clearDeadZone() {
+
+            ctx.clearRect(0, 0, 300, 150);
+
+            for (let i = 1; i < clickedCount + 1; i++) {
+                let id = 'point' + i;
+                document.getElementById(id).remove();
+            }
+
+            clickedCount = 0;
+            pointsArray = [];
+
+
+        }
+
+        function saveDeadZone() {
+
+            if (pointsArray.length > 0) {
+                localStorage.setItem('assetzone', JSON.stringify(pointsArray));
+            }
+
+
+            const {
+                ipcRenderer
+            } = require('electron');
+
+            ipcRenderer.send('gotoDashBoard');
+
+            // document.getElementById('gotoDashBoardPage').addEventListener('click', () => {
+            //     ipcRenderer.send('gotoDashBoard');
+            //     // console.log('window button clicked');
+            // });
+
+
+
+        }
+    </script>
+
+
+    <!-- <script src="js/mapchoose.js"></script> -->
+</body>
+
+</html>

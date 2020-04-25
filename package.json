@@ -1,0 +1,50 @@
+{
+  "name": "ivora",
+  "version": "1.0.0",
+  "description": "ivora Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/ivoraicon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Electron Tutorial App\""
+  },
+  "build": {
+    "appId": "ivora.id",
+    "mac": {
+      "category": "ivora.app.category.type"
+    }
+  },
+  "win": {
+    "target": "NSIS"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "digishala",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^6.0.1",
+    "electron-builder": "^21.2.0",
+    "electron-packager": "^14.0.5"
+  },
+  "dependencies": {
+    "base64-img": "^1.0.4",
+    "base64-to-image": "^1.0.2",
+    "canvas2image": "^1.0.5",
+    "chokidar": "^3.3.0",
+    "dom-to-image": "^2.6.0",
+    "electron-reload": "^1.5.0",
+    "html-to-image": "^0.1.1",
+    "html2image": "^1.2.0",
+    "image-size": "^0.7.4",
+    "image-to-blob": "^0.2.0",
+    "point-in-polygon": "^1.0.1",
+    "robust-point-in-polygon": "^1.0.3",
+    "yarn": "^1.17.3"
+  }
+}

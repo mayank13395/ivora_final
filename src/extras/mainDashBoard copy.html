@@ -1,0 +1,2027 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IVORA</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <Style>
+        .navIvora {
+            background-color: #4C5E44;
+            /* background-color: linear-gradient(#4C5E44, #3D5135); */
+            /* width: 95%;
+      margin: auto;
+      margin-top: 3%; */
+        }
+        
+        .navcontent a {
+            color: white;
+        }
+        
+        a {
+            color: white;
+        }
+        
+        .sensorstyle {
+            margin-top: 20%;
+            margin-bottom: 20%;
+            margin-left: 19%;
+            margin-right: 15%;
+            text-align: center;
+            letter-spacing: 2px;
+            color: white;
+            font-size: 17px;
+        }
+        
+        .btnn {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 185px;
+            height: 60px;
+            margin: 10px;
+        }
+        
+        .btnSave {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 109px;
+            height: 57px;
+            margin: 5px;
+            /* margin-top: 44px; */
+            /* float: right; */
+        }
+        
+        .bg {
+            float: left;
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 10px;
+            margin-left: 30px;
+            height: 553px;
+            width: 800px;
+            position: relative;
+        }
+        
+        .nav .open>a,
+        .nav .open>a:focus,
+        .nav .open>a:hover {
+            background-color: #eee;
+            /* border-color: #337ab7; */
+        }
+        
+        .modal {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            bottom: 0;
+            left: 0;
+            z-index: 10040;
+            overflow: auto;
+            overflow-y: auto;
+        }
+        
+        .slidecontainer {
+            width: 100%;
+            margin-top: 45px;
+            cursor: pointer;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            cursor: pointer;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+        
+        .iconImage {
+            position: absolute;
+        }
+        
+        .nav .open>a,
+        .nav .open>a:focus,
+        .nav .open>a:hover {
+            background-color: #2b5422;
+            color: white;
+            cursor: pointer
+        }
+        
+        .nav>li>a:focus,
+        .nav>li>a:hover {
+            text-decoration: none;
+            background-color: #4C5E44;
+            color: white;
+        }
+        
+        .point {
+            border: 3px solid;
+            border-radius: 20px;
+        }
+        
+        .Blink {
+            animation: blinker cubic-bezier(.5, 0, 1, 1) infinite alternate;
+        }
+        
+        @keyframes blinker {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.5;
+            }
+        }
+    </Style>
+</head>
+
+<body onload="getActivityDataAndDisplay()" background="./assets/background.jpg" style="overflow: hidden">
+    <div>
+        <nav class="navbar navIvora ">
+            <div class="container-fluid" style="margin: 0px 10px;">
+                <div class="navbar-header navcontent" style=" text-align: center">
+                    <a class="navbar-brand" href="#">IVORA</a>
+                </div>
+
+
+                <ul class="nav dropmenu navbar-nav navbar-right">
+                    <li><a id="dropdown" class="  dropdown-toggle" data-toggle="dropdown" style="word-spacing: 0px;letter-spacing: 3px;cursor: pointer; " href="#"><span
+                                class="glyphicon glyphicon-cog"></span>
+                            SETTINGS</a>
+                        <ul style="background-color:#56754B " class="dropdown-menu">
+                            <li><a style="word-spacing: 0px;letter-spacing: 3px;color: white  " href="#" data-toggle="modal" data-target="#exampleModal">CHANGE SENSITIVITY</a></li>
+                            <li><a id="gotoMarkAssetZonePage" style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">MARK
+                                    ASSET</a></li>
+                            <li><a id="gotolatlngPage" style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">SHOW
+                                    HISTORY</a></li>
+                            <li><a id="gotolatlngPage" style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">UPDATE
+                                    MAP</a></li>
+                            <li><a id="gotolatlngPage" onclick="gotoMarkDeadZonePage()" style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">MARK DEAD
+                                    ZONE</a></li>
+                            <li style="margin-top: 8px">
+                                <input onchange="hideShowDeadZone(event)" style="float: left" type="checkbox">
+                                <p style="word-spacing: 0px;letter-spacing: 3px;color: white;float: left;margin-left: 10px " href="#">HIDE DEAD ZONE
+                                </p>
+                            </li>
+                            <div style="clear: both"></div>
+
+
+                            <li>
+                                <input onchange="hideShowAsset(event)" style="float: left" type="checkbox">
+                                <p id="gotolatlngPage" onclick="hideShowAsset()" style="word-spacing: 0px;letter-spacing: 3px;color: white;float: left;margin-left: 10px " href="#">HIDE ASSET ZONE
+                                </p>
+                            </li>
+
+                        </ul>
+
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: #30432C;height: 260px;" class="modal-content">
+                <div class="modal-body">
+                    <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 style="color: white" class="modal-title" id="exampleModalLabel">Choose Sensitivity</h3>
+
+
+
+                    <div class="slidecontainer">
+                        <input type="range" min="0.1" max="2" step="0.1" value="0.2" class="slider" id="myRange">
+                        <p style="color: white;
+            text-align: center;
+            margin: 25px;
+            font-size: 20px;">Value: <span id="demo"></span></p>
+                    </div>
+
+                    <!-- <button type="button" class="btnSave" data-dismiss="modal">Close</button> -->
+
+                    <div style="margin-left:445px;width:190px">
+                        <button type="button" class="btnSave" data-dismiss="modal" onclick="saveSensitivityData()">Save</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div id="bgg" class="bg">
+
+            <img style="width: 100%;height: 100%;position: absolute;" src="C:/ivora-data/map.png">
+            <canvas id="myCanvas" style=" height: 537px;width: 784px;position: absolute;"></canvas>
+
+        </div>
+        <div style="float: right; width: 194px; margin-top: 16px;">
+            <div style="margin: auto;
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 20px;
+      color: white;
+      width: 100px;">
+                SENSOR HEALTH
+            </div>
+
+            <div class="sensorstyle">
+                <div id="s1" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 1
+                </div>
+
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s2" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 2
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s3" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 3
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s4" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 4
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s5" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 5
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s6" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 6
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <!-- <div style="text-align:center">
+        Sensor logs
+      </div> -->
+
+        </div>
+
+
+    </div>
+
+    <div style="clear: both"></div>
+
+    <div style="margin-top: 20px;color: white;text-align: center">
+
+        <div style="width: 25%;float: left">
+            <div>
+                <img src="https://img.icons8.com/officexs/48/000000/medium-battery.png"><span style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="systemBattery"></span>
+            </div>
+            <p style="margin-top: 10px">SYSTEM BATTERY </p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/color/48/000000/smartphone-cpu.png"><span style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="cpuTemp"></span>
+            </div>
+            <p style="margin-top: 10px">CPU TEMPERATURE</p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/color/48/000000/system-task.png"><span style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="systemTemp"></span>
+            </div>
+            <p style="margin-top: 10px">SYSTEM TEMPERATURE</p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/flat_round/48/000000/electro-devices--v3.png"><span style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="cpuCoreVoltage"></span>
+            </div>
+
+            <p style="margin-top: 10px">CPU VOLTAGE</p>
+        </div>
+
+        <!-- <button class="btnn" id="gotoMapPage">MARK ASSET</button>
+    <button class="btnn" id="gotoMapPage" onclick="createAnotherSensor()">SHOW HISTORY</button>
+    <button class="btnn" id="gotoMapPage" onclick="createAnotherSensor()">MARK DEAD ZONE</button> -->
+
+    </div>
+    <div style="clear: both"></div>
+
+
+    <script src="js/mainDashBoard.js"></script>
+
+    <script>
+        const fs = require('fs');
+        var classifyPoint = require("robust-point-in-polygon");
+        var inside = require('point-in-polygon');
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+        let sensitivityValue;
+        let activityPositionsData;
+
+        let deadZoneAreaVal;
+        let assetZoneAreaVal;
+        let assetsElement = [];
+        let newPolyArray = [];
+        let hideShowDeadZoneVal = false;
+        let hideShowAssetZoneVal = false;
+        let activityName;
+        let totalNumberofAssets;
+        let newPolygonDeadzone = [];
+        let polyArray = [];
+        let polyBoundingArray = [];
+        let newTempPolygonDeadzone;
+
+
+        slider.oninput = function() {
+
+            sensitivityValue = this.value;
+            output.innerHTML = this.value;
+
+        }
+
+
+        function saveSensitivityData() {
+
+            // // // // // // // // // console.log('ssfs');
+
+            fs.writeFile("C:/Users/Bangalore/Desktop/ivora data files/output/info.txt", `sensitivity ${sensitivityValue}`, function(err) {
+                if (err) {
+                    return // // // // // // // // // console.log(err);
+                }
+                // // // // // // // // // console.log("The file was saved!");
+            });
+
+            // var polygon = [];
+            // for (let i = 0; i < deadZoneAreaVal.length; i++) {
+            //     polygon.push([deadZoneAreaVal[i].x, deadZoneAreaVal[i].y]);
+
+            // }
+
+            // // // // // // // // // // console.log(polygon);
+
+
+            // let widthOfImage = 537;
+            // let heightOfImage = 784;
+
+            // for (let i = 0; i < heightOfImage; i++) {
+            //     for (let j = 0; j < widthOfImage; j++) {
+            //         // // // // // // // // // console.log(inside(polygon, i, j));
+
+            //         if (classifyPoint(polygon, [i, j]) == 1) {
+            //             let point = document.createElement('div');
+            //             point.style.position = "absolute";
+            //             point.className = 'point';
+            //             point.style.marginLeft = i + "px";
+            //             point.style.marginTop = j + "px";
+            //             point.style.borderColor = 'green';
+            //             document.getElementById('bgg').appendChild(point);
+            //             j++;
+
+
+
+            //         } else if (classifyPoint(polygon, [i, j]) == 0) {
+            //             let point = document.createElement('div');
+            //             point.style.position = "absolute";
+            //             point.className = 'point';
+            //             point.style.marginLeft = i + "px";
+            //             point.style.marginTop = j + "px";
+            //             point.style.borderColor = 'black'
+            //             document.getElementById('bgg').appendChild(point);
+            //             //  j++;
+            //         }
+
+
+            // } else if (inside ([i,j],polygon) == -1) {
+            //   let point = document.createElement('div');
+            //   point.style.position = "absolute";
+            //   point.className = 'point';
+            //   point.style.marginLeft = i + "px";
+            //   point.style.marginTop = j + "px";
+            //   point.style.borderColor = 'red'
+            //   document.getElementById('bgg').appendChild(point);
+            //   // j++;
+            // }
+
+            // j = j + 10;
+            // }
+
+            // i = i + 50;
+
+            // }
+
+
+
+        }
+
+
+        function getActivityDataAndDisplay() {
+
+            assetZoneAreaVal = JSON.parse(localStorage.getItem('assetzone'));
+            // // // // // // // // console.log(assetZoneAreaVal);
+
+            deadZoneAreaVal = JSON.parse(localStorage.getItem('deadzone'));
+            // // // // // // // // console.log(deadZoneAreaVal);
+
+            let sensorLocationsForMap = JSON.parse(localStorage.getItem('sensorLocationPosition'));
+            // // // // // // console.log(sensorLocationsForMap);
+
+
+
+            //sensor position mark
+
+            // for (let i = 0; i < )
+
+            var polygonDeadzone = [];
+            let xArray = [];
+            let yArray = [];
+            if (deadZoneAreaVal.length != 0) {
+                for (let i = 0; i < deadZoneAreaVal.length; i++) {
+                    polygonDeadzone.push([deadZoneAreaVal[i].x, deadZoneAreaVal[i].y]);
+                    xArray.push(deadZoneAreaVal[i].x);
+                    yArray.push(deadZoneAreaVal[i].y);
+
+
+                }
+
+
+            }
+            // // // // // console.log(polygonDeadzone);
+
+
+            var minXDeadzone = Math.min(...xArray);
+            var maxXDeadzone = Math.max(...xArray);
+
+            var minYDeadzone = Math.min(...yArray);
+            var maxYDeadzone = Math.max(...yArray);
+
+            // // // // // // // // // console.log('hhhhhhhhhhhhhhhhhhh', minXDeadzone, maxXDeadzone, minYDeadzone, maxYDeadzone);
+
+
+
+
+            let xassetsArray = [];
+            let yassetsArray = [];
+            if (assetZoneAreaVal.length != 0) {
+                for (let i = 0; i < assetZoneAreaVal.length; i++) {
+                    xassetsArray.push(assetZoneAreaVal[i].x);
+                    yassetsArray.push(assetZoneAreaVal[i].y);
+                }
+
+            }
+
+
+
+            let centerxPointOfMarkAssets = (Math.min(...xassetsArray) + Math.max(...xassetsArray)) / 2;
+            let centeryPointOfMarkAssets = (Math.min(...yassetsArray) + Math.max(...yassetsArray)) / 2;
+
+            function Vector2(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            function straight_skeleton(poly, spacing) {
+                // http://stackoverflow.com/a/11970006/796832
+                // Accompanying Fiddle: http://jsfiddle.net/vqKvM/35/
+
+                var resulting_path = [];
+                var N = poly.length;
+                var mi, mi1, li, li1, ri, ri1, si, si1, Xi1, Yi1;
+                for (var i = 0; i < N; i++) {
+                    mi = (poly[(i + 1) % N].y - poly[i].y) / (poly[(i + 1) % N].x - poly[i].x);
+                    mi1 = (poly[(i + 2) % N].y - poly[(i + 1) % N].y) / (poly[(i + 2) % N].x - poly[(i + 1) % N].x);
+                    li = Math.sqrt((poly[(i + 1) % N].x - poly[i].x) * (poly[(i + 1) % N].x - poly[i].x) + (poly[(i + 1) % N].y - poly[i].y) * (poly[(i + 1) % N].y - poly[i].y));
+                    li1 = Math.sqrt((poly[(i + 2) % N].x - poly[(i + 1) % N].x) * (poly[(i + 2) % N].x - poly[(i + 1) % N].x) + (poly[(i + 2) % N].y - poly[(i + 1) % N].y) * (poly[(i + 2) % N].y - poly[(i + 1) % N].y));
+                    ri = poly[i].x + spacing * (poly[(i + 1) % N].y - poly[i].y) / li;
+                    ri1 = poly[(i + 1) % N].x + spacing * (poly[(i + 2) % N].y - poly[(i + 1) % N].y) / li1;
+                    si = poly[i].y - spacing * (poly[(i + 1) % N].x - poly[i].x) / li;
+                    si1 = poly[(i + 1) % N].y - spacing * (poly[(i + 2) % N].x - poly[(i + 1) % N].x) / li1;
+                    Xi1 = (mi1 * ri1 - mi * ri + si - si1) / (mi1 - mi);
+                    Yi1 = (mi * mi1 * (ri1 - ri) + mi1 * si - mi * si1) / (mi1 - mi);
+                    // Correction for vertical lines
+                    if (poly[(i + 1) % N].x - poly[i % N].x == 0) {
+                        Xi1 = poly[(i + 1) % N].x + spacing * (poly[(i + 1) % N].y - poly[i % N].y) / Math.abs(poly[(i + 1) % N].y - poly[i % N].y);
+                        Yi1 = mi1 * Xi1 - mi1 * ri1 + si1;
+                    }
+                    if (poly[(i + 2) % N].x - poly[(i + 1) % N].x == 0) {
+                        Xi1 = poly[(i + 2) % N].x + spacing * (poly[(i + 2) % N].y - poly[(i + 1) % N].y) / Math.abs(poly[(i + 2) % N].y - poly[(i + 1) % N].y);
+                        Yi1 = mi * Xi1 - mi * ri + si;
+                    }
+
+                    //// // // // // // // // console.log("mi:", mi, "mi1:", mi1, "li:", li, "li1:", li1);
+                    //// // // // // // // // console.log("ri:", ri, "ri1:", ri1, "si:", si, "si1:", si1, "Xi1:", Xi1, "Yi1:", Yi1);
+
+                    resulting_path.push({
+                        x: Xi1,
+                        y: Yi1
+                    });
+                }
+
+                return resulting_path;
+            }
+
+            var polygonAssetZone = [];
+            for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+                polygonAssetZone.push([assetZoneAreaVal[i].x, assetZoneAreaVal[i].y]);
+
+            }
+            // // // // // // console.log(polygonAssetZone);
+
+
+            var poly = [];
+            for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+                poly.push(new Vector2(assetZoneAreaVal[i].x, assetZoneAreaVal[i].y))
+
+            }
+
+            // // // // console.log(poly);
+
+
+            var temppolygonDeadzone = [];
+            for (let i = 0; i < deadZoneAreaVal.length; i++) {
+                temppolygonDeadzone.push(new Vector2(deadZoneAreaVal[i].x, deadZoneAreaVal[i].y))
+
+            }
+            temppolygonDeadzone.pop();
+            // temppolygonDeadzone.push(new Vector2(deadZoneAreaVal[0].x, deadZoneAreaVal[0].y));
+
+            // // // // // console.log(temppolygonDeadzone);
+            let deadZoneInc = 25;
+
+            // temppolygonDeadzone.pop();
+
+
+
+            // // // // // console.log(straight_skeleton(temppolygonDeadzone, deadZoneInc));
+
+            newTempPolygonDeadzone = straight_skeleton(temppolygonDeadzone, deadZoneInc);
+
+
+
+            for (let i = 0; i < newTempPolygonDeadzone.length; i++) {
+                newPolygonDeadzone.push([newTempPolygonDeadzone[i].x, newTempPolygonDeadzone[i].y]);
+
+            }
+            // // // // console.log(newPolygonDeadzone);
+
+
+
+            // {
+            //     let c = document.getElementById("myCanvas");
+            //     // // // // // // // // // // console.log(c);
+
+            //     ctx = c.getContext("2d");
+            //     ctx.strokeStyle = 'yellow';
+            //     ctx.beginPath();
+            //     // context = canvas.context2d;    
+            //     // ctx.translate(0.5, 0.5);
+
+            //     // ctx.moveTo(0, 0);
+            //     // ctx.lineTo(299, 149);
+            //     for (let i = 0; i < newTempPolygonDeadzone.length - 1; i++) {
+            //         // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+
+            //         ctx.moveTo(newTempPolygonDeadzone[i].x * (300 / 784), newTempPolygonDeadzone[i].y * (150 / 537));
+
+
+            //         ctx.lineTo(newTempPolygonDeadzone[i + 1].x * (300 / 784), newTempPolygonDeadzone[i + 1].y * (150 / 537));
+
+
+            //         ctx.stroke();
+
+
+
+            //     }
+            // }
+
+
+
+
+
+            // let polyAssetArray = [];
+
+            // // // // // // // // console.log(poly);
+
+
+
+
+
+            // // // // // // // // console.log(straight_skeleton(poly, 10));
+
+
+
+            newPolyArray.push(polygonAssetZone);
+
+            // let a = straight_skeleton(poly, polyCount);
+            // // // // // // // // // console.log(a);
+
+
+
+            let d1 = 10;
+            let d2 = 70;
+            let d3 = 100;
+            let polyCount = d1;
+
+            for (let k = 0; k < 3; k++) {
+                let a = straight_skeleton(poly, polyCount);
+                // // // // console.log(a);
+
+                for (let i = 0; i < a.length; i++) {
+                    polyBoundingArray.push([a[i].x, a[i].y]);
+                }
+                // // // // console.log(polyBoundingArray);
+                if (k == 0) {
+                    polyCount = d2;
+                } else if (k == 1) {
+                    polyCount = d3;
+                }
+
+
+                // // // // // // // // console.log(inside([537, 784], polyBoundingArray));
+
+                if (inside([537, 784], polyBoundingArray) === false) {
+                    polyArray.push(straight_skeleton(poly, polyCount));
+
+                } else if (inside([537, 784], polyBoundingArray) === true) {
+                    // // // // // // // // // console.log('break');
+
+                    break;
+                }
+
+                polyBoundingArray = [];
+
+            }
+
+            // // // // // // // console.log(polyArray);
+
+
+
+            for (let i = 0; i < polyArray.length; i++) {
+                let tempPoly = [];
+                // newPolyArray.push([polyArray[i][0].x,polyArray[i][0].x],[polyArray[i][1].x,polyArray[i][1].x],[polyArray[i][2].x,polyArray[i][2].x],[polyArray[i][3].x,polyArray[i][3].x])
+                for (let j = 0; j < polyArray[i].length; j++) {
+
+                    tempPoly.push([polyArray[i][j].x, polyArray[i][j].y]);
+                }
+
+                newPolyArray.push(tempPoly);
+
+
+            }
+            // // // // console.log(newPolyArray);
+
+
+
+
+
+
+
+
+
+
+            let distancefromAssetsZone = function(a1, b1) {
+                let x = a1 - centerxPointOfMarkAssets;
+                let y = b1 - centeryPointOfMarkAssets;
+
+                return Math.sqrt(x * x + y * y);
+
+
+
+            }
+
+
+            addAssets();
+
+
+            // activityPositionsData = JSON.parse(localStorage.getItem('activityPositionsData'));
+            // // // // // // // // // console.log(activityPositionsData);
+            // activityName = Object.keys(activityPositionsData);
+            // // // // // // // // // // console.log(activityPositionsData.VEHICLE.length);
+
+            // // document.createElement = 
+
+            // totalNumberofAssets = 0;
+
+            // for (let i = 0; i < activityName.length; i++) {
+
+
+            //     if (activityName[i] === 'ACTIVITY') {
+            //         for (let k = 0; k < activityPositionsData.ACTIVITY.length; k++) {
+            //             totalNumberofAssets++;
+
+            //             let x = +activityPositionsData.ACTIVITY[k].split(' ')[1];
+            //             let y = +activityPositionsData.ACTIVITY[k].split(' ')[2];
+
+
+            //             if (inside([x, y], newPolygonDeadzone) === false || hideShowDeadZoneVal == true) {
+
+
+            //                 let img = new Image(50, 50);
+            //                 for (let j = 0; j < polyArray.length; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/man Red.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/man Yellow.png";
+            //                         // // // // // // console.log('second zone');
+
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/man yellow.png";
+
+            //                     } else {
+            //                         img.src = "assets/icons/man Red.png";
+            //                     }
+            //                 }
+            //                 // img.src = "https://img.icons8.com/officel/16/000000/human-head.png";
+            //                 img.style.position = 'absolute';
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.ACTIVITY[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.ACTIVITY[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+
+            //             }
+
+            //         }
+
+
+
+            //     } else if (activityName[i] === 'FOOTSTEPS') {
+            //         for (let k = 0; k < activityPositionsData.FOOTSTEPS.length; k++) {
+            //             totalNumberofAssets++;
+            //             let x = +activityPositionsData.FOOTSTEPS[k].split(' ')[1];
+            //             let y = +activityPositionsData.FOOTSTEPS[k].split(' ')[2];
+
+            //             if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+            //                 let img = new Image(40, 40);
+            //                 for (let j = 0; j < polyArray.length; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "https://img.icons8.com/android/12/000000/left-footprint.png";
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "https://img.icons8.com/android/6/000000/left-footprint.png";
+            //                     } else {
+            //                         img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+            //                     }
+            //                 }
+            //                 // img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+            //                 img.style.position = 'absolute';
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.FOOTSTEPS[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.FOOTSTEPS[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+            //             }
+            //         }
+
+            //     } else if (activityName[i] === 'VEHICLE') {
+
+            //         for (let k = 0; k < activityPositionsData.VEHICLE.length; k++) {
+            //             totalNumberofAssets++;
+            //             let x = +activityPositionsData.VEHICLE[k].split(' ')[1];
+            //             let y = +activityPositionsData.VEHICLE[k].split(' ')[2];
+
+            //             if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+            //                 // // // // // // // // // console.log('1111111111111111');
+            //                 let img = new Image(50, 50);
+            //                 for (let j = 0; j < polyArray.length; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/truck Red.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/truck.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/truck.png";
+
+            //                     } else {
+            //                         img.src = "assets/icons/truck.png";
+            //                     }
+            //                 }
+            //                 // <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+            //                 // img.src = "https://img.icons8.com/dotty/400/000000/half-track-vehicle.png";
+            //                 img.style.position = 'absolute';
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.VEHICLE[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.VEHICLE[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+            //             }
+            //         }
+
+            //     } else if (activityName[i] === 'ANIMAL') {
+            //         for (let k = 0; k < activityPositionsData.ANIMAL.length; k++) {
+            //             totalNumberofAssets++;
+            //             let x = +activityPositionsData.ANIMAL[k].split(' ')[1];
+            //             let y = +activityPositionsData.ANIMAL[k].split(' ')[2];
+
+            //             if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+            //                 let img = new Image(20, 20);
+            //                 for (let j = 0; j < polyArray.length; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/animal.png";
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/animal.png";
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/animal.png";
+            //                     } else {
+            //                         img.src = "assets/icons/animal.png";
+            //                     }
+            //                 }
+            //                 // img.src = "https://img.icons8.com/color/48/000000/lion.png";
+            //                 img.style.position = 'absolute';
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.ANIMAL[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.ANIMAL[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+            //             }
+            //         }
+
+            //     } else if (activityName[i] === 'UNCLASSIFIED') {
+            //         for (let k = 0; k < activityPositionsData.UNCLASSIFIED.length; k++) {
+            //             totalNumberofAssets++;
+            //             let x = +activityPositionsData.UNCLASSIFIED[k].split(' ')[1];
+            //             let y = +activityPositionsData.UNCLASSIFIED[k].split(' ')[2];
+
+            //             if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+
+
+            //                 let img = new Image(50, 50);
+            //                 for (let j = 0; j < newPolyArray.length - 1; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/Location Popup.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/Location Popup.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/Location Popup.png";
+
+            //                     } else {
+            //                         img.src = "assets/icons/Location Popup.png";
+            //                     }
+            //                 }
+            //                 // img.src = "https://img.icons8.com/ios-filled/50/000000/ios-app-icon-shape.png";
+            //                 img.style.position = 'absolute';
+
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.UNCLASSIFIED[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.UNCLASSIFIED[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+            //             }
+            //         }
+
+            //     } else if (activityName[i] === 'TUNNEL') {
+            //         // // // // // // console.log('tunnel');
+
+            //         for (let k = 0; k < activityPositionsData.TUNNEL.length; k++) {
+            //             totalNumberofAssets++;
+            //             let x = +activityPositionsData.TUNNEL[k].split(' ')[1];
+            //             let y = +activityPositionsData.TUNNEL[k].split(' ')[2];
+
+            //             if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+            //                 let img = new Image(30, 30);
+            //                 for (let j = 0; j < polyArray.length; j++) {
+            //                     if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/worker-with-shovel.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/worker-with-shovel.png";
+
+            //                     } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+            //                         img.src = "assets/icons/worker-with-shovel.png";
+
+            //                     } else {
+            //                         img.src = "assets/icons/worker-with-shovel.png";
+            //                     }
+            //                 }
+            //                 // img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+            //                 img.style.position = 'absolute';
+            //                 img.className = 'Blink';
+            //                 img.style.marginLeft = +activityPositionsData.TUNNEL[k].split(' ')[1];
+            //                 img.style.marginTop = +activityPositionsData.TUNNEL[k].split(' ')[2];
+            //                 assetsElement.push({
+            //                     img,
+            //                     x,
+            //                     y
+            //                 });
+            //                 document.getElementById('bgg').appendChild(img);
+            //             }
+            //         }
+
+
+            //     }
+            // }
+
+
+
+            let speedDivision = 1 / 4;
+            let blinkSpeedsArray = [];
+            let speed = speedDivision;
+
+            for (let i = 0; i < newPolyArray.length; i++) {
+
+                blinkSpeedsArray.push(speed);
+                speed = speed + speedDivision;
+            }
+            // // // // // // console.log(blinkSpeedsArray);
+            let count = blinkSpeedsArray.length;
+
+            for (let k = 0; k < assetsElement.length; k++) {
+                if (inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[0]) == true) {
+
+
+                    assetsElement[k].img.style.animationDuration = 0.1 + 's';
+                    // // // // // // // // console.log(assetsElement[k].img.style.animationDuration);
+
+                }
+            }
+
+            // // // // console.log(inside([631, 151], newPolyArray[1]), newPolyArray[0]);
+
+
+            for (let z = 0; z < newPolyArray.length - 1; z++) {
+
+                for (let k = 0; k < assetsElement.length; k++) {
+                    if ((inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[z])) == false && (inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[z + 1])) == true) {
+                        assetsElement[k].img.style.animationDuration = blinkSpeedsArray[z] + 's';
+                        // // // // console.log('3333333333333');
+
+
+
+                    }
+                }
+
+
+
+            }
+
+            // // // // // // console.log(newPolyArray);
+
+            for (let j = 0; j < newPolyArray.length; j++) {
+                // let c = document.getElementById("myCanvas");
+                // // // // // // // // // // // console.log(c);
+
+                // ctx = c.getContext("2d");
+                // ctx.strokeStyle = 'green';
+                // ctx.beginPath();
+
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(299, 149);
+                for (let i = 0; i < newPolyArray[j].length - 1; i++) {
+                    // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+                    let x = newPolyArray[j][i][0];
+                    let y = newPolyArray[j][i][1];
+                    // // // // // // // console.log(x, y);
+                    let c = document.getElementById("myCanvas");
+                    // // // // // // // // // // console.log(c);
+
+                    ctx = c.getContext("2d");
+                    ctx.strokeStyle = 'green';
+                    ctx.beginPath();
+
+
+
+
+                    ctx.moveTo(newPolyArray[j][i][0] * (300 / 784), newPolyArray[j][i][1] * (150 / 537));
+
+
+                    ctx.lineTo(newPolyArray[j][i + 1][0] * (300 / 784), newPolyArray[j][i + 1][1] * (150 / 537));
+
+
+                    ctx.stroke();
+                    // // // // // // // console.log('adsafdasfasf');
+
+
+
+
+                }
+            }
+
+
+
+
+
+
+
+            // 
+            // // // // // // // // // // console.log(assetsElement);
+
+
+
+            // // // // // // // // // // console.log(totalNumberofAssets);
+
+            // let blinkSpeed = 1;
+            // let speedDivision = 0.9 / totalNumberofAssets;
+            // let blinkSpeedsArray = [];
+            // let speed = speedDivision;
+
+            // for (let i = 0; i < totalNumberofAssets; i++) {
+
+            //     blinkSpeedsArray.push(speed);
+            //     speed = speed + speedDivision;
+            // }
+            // // // // // // // // // console.log(blinkSpeedsArray);
+
+
+
+
+            // points.sort(function(a, b){return a-b});
+
+            // let distanceArray = [];
+
+            // for (let i = 0; i < assetsElement.length; i++) {
+            //     assetsElement[i]['distanceFromAsset'] = distancefromAssetsZone(assetsElement[i].x, assetsElement[i].y);
+            //     distanceArray.push(distancefromAssetsZone(assetsElement[i].x, assetsElement[i].y));
+
+
+
+            // }
+            // // // // // // // // // console.log(assetsElement);
+
+            // distanceArray.sort(function(a, b) {
+            //     return a - b
+            // });
+            // // // // // // // // // console.log(distanceArray);
+
+            // let k = 0;
+            // let newassetsElement = [];
+            // for (let k = 0; k < distanceArray.length; k++) {
+            //     for (let j = 0; j < assetsElement.length; j++) {
+            //         if (distanceArray[k] === assetsElement[j].distanceFromAsset) {
+            //             // // // // // // // // // console.log(assetsElement[j]);
+
+            //             newassetsElement.push(assetsElement[j]);
+            //             break;
+
+            //         }
+            //     }
+            // }
+
+            // // // // // // // // // console.log(newassetsElement);
+
+            // for (let i = 0; i < newassetsElement.length; i++) {
+            //     newassetsElement[i].img.style.animationDuration = blinkSpeedsArray[i] + 's';
+            // }
+
+            // // // // // // // // console.log(newassetsElement);
+
+
+
+
+
+
+            {
+                let c = document.getElementById("myCanvas");
+                // // // // // // // // // // console.log(c);
+
+                ctx = c.getContext("2d");
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+
+                for (let i = 0; i < deadZoneAreaVal.length - 1; i++) {
+                    // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+
+                    ctx.moveTo(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+                    ctx.lineTo(deadZoneAreaVal[i + 1].xVal, deadZoneAreaVal[i + 1].yVal);
+
+
+                    ctx.stroke();
+
+
+
+                }
+                // context = canvas.context2d;    
+                // ctx.translate(0.5, 0.5);
+
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(299, 149);
+                // for (let i = 0; i < newPolygonDeadzone.length - 1; i++) {
+                //     // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+                //     let x = newPolygonDeadzone[i][0] * (300 / 784);
+
+                //     let y = newPolygonDeadzone[i][1] * (150 / 537);
+
+                //     let toX = newPolygonDeadzone[i + 1][0] * (300 / 784);
+
+                //     let toY = newPolygonDeadzone[i + 1][1] * (150 / 537);
+
+
+                //     ctx.moveTo(x, y);
+
+
+                //     ctx.lineTo(toX, toY);
+
+
+                //     ctx.stroke();
+
+
+
+                // }
+
+                // ctx.moveTo(newPolygonDeadzone[newTempPolygonDeadzone.length - 1][0] * (300 / 784), newPolygonDeadzone[newTempPolygonDeadzone.length - 1][1] * (150 / 537))
+                // ctx.lineTo(newPolygonDeadzone[0][0] * (300 / 784), newPolygonDeadzone[0][1] * (150 / 537))
+                // ctx.stroke();
+            }
+
+
+            {
+                let c = document.getElementById("myCanvas");
+                // // // // // // // // // // console.log(c);
+
+                ctx = c.getContext("2d");
+                ctx.strokeStyle = 'green';
+                ctx.beginPath();
+                ctx.translate(0.5, 0.5);
+                // ctx.moveTo(0, 0);
+
+
+                for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+
+
+                    ctx.moveTo(assetZoneAreaVal[i].xVal, assetZoneAreaVal[i].yVal);
+
+                    ctx.lineTo(assetZoneAreaVal[i + 1].xVal, assetZoneAreaVal[i + 1].yVal);
+                    ctx.strokeStyle = 'blue';
+
+                    ctx.stroke();
+
+
+
+                }
+
+
+
+            }
+
+
+            let deadZoneText = document.createElement('div');
+            deadZoneText.id = 'deadZoneText';
+            deadZoneText.style.position = "absolute";
+            let xpix = (minXDeadzone + maxXDeadzone) / 2 - 30;
+            // // // // // // // // // console.log(xpix);
+
+
+            deadZoneText.style.marginLeft = xpix + "px";
+            deadZoneText.style.marginTop = (minYDeadzone + maxYDeadzone) / 2 + "px";
+            deadZoneText.innerText = 'DEADZONE';
+            deadZoneText.style.color = 'green';
+
+            document.getElementById('bgg').appendChild(deadZoneText);
+            // // // // // // // // // console.log(deadZoneText);
+
+
+
+
+            checkForSensorHealth();
+
+        }
+
+        const {
+            ipcRenderer
+        } = require('electron');
+
+        document.getElementById('gotolatlngPage').addEventListener('click', () => {
+            ipcRenderer.send('gotolatlngEntryPage');
+            // // // // // // // // // console.log('window button clicked');
+        });
+
+
+        document.getElementById('gotoMarkAssetZonePage').addEventListener('click', () => {
+            ipcRenderer.send('gotoMarkAssetZonePage');
+            // // // // // // // // // console.log('window button clicked');
+        });
+
+        function checkForSensorHealth() {
+            setTimeout(() => {
+
+                var sensorHealthData = fs.readFileSync('C:/Users/Bangalore/Desktop/ivora data files/output/systemhealth.txt', 'utf8');
+                // // // // // // // // // console.log(sensorHealthData);
+
+                let sensorHealthArray = sensorHealthData.split('\n');
+                //  // // // // // // // // // console.log(sensorHealthArray);
+
+                let sensorHealth = {};
+                let data = [];
+
+                for (let i = 0; i < sensorHealthArray.length; i++) {
+                    if (sensorHealthArray[i].includes('SENSOR 1')) {
+
+                        // // // // // // // // // console.log('s1', sensorHealthArray[i]);
+                        sensorHealth['s1'] = sensorHealthArray[i].split('1')[1];
+
+                        if (sensorHealth.s1.split(' ')[1] === 'ON') {
+                            document.getElementById('s1').style.borderColor = 'green';
+                            // document.getElementById('s1').className = 'Blink';
+
+                        } else {
+                            document.getElementById('s1').style.borderColor = 'red';
+                            // document.getElementById('s1').className = 'Blink';
+
+                        }
+
+                        if (sensorHealth.s1.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+                    } else if (sensorHealthArray[i].includes('SENSOR 2')) {
+
+                        // // // // // // // // // console.log('s2', sensorHealthArray[i]);
+                        sensorHealth['s2'] = sensorHealthArray[i].split('2')[1];
+
+                        if (sensorHealth.s2.split(' ')[1] === 'ON') {
+                            document.getElementById('s2').style.borderColor = 'green';
+                            // document.getElementById('s2').className = 'Blink';
+
+                        } else {
+                            document.getElementById('s2').style.borderColor = 'red';
+                            // document.getElementById('s2').className = 'Blink';
+
+                        }
+
+                        if (sensorHealth.s2.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+                    } else if (sensorHealthArray[i].includes('SENSOR 3')) {
+
+                        // // // // // // // // // console.log('s3', sensorHealthArray[i]);
+                        sensorHealth['s3'] = sensorHealthArray[i].split('3')[1];
+                        // // // // // // // // // // console.log(sensorHealth.s1.split(' '));
+
+                        if (sensorHealth.s3.split(' ')[1] === 'ON') {
+                            document.getElementById('s3').style.borderColor = 'green';
+                            // document.getElementById('s3').className = 'Blink'
+
+                        } else {
+                            document.getElementById('s3').style.borderColor = 'red';
+                            // document.getElementById('s3').className = 'Blink';
+
+
+                        }
+
+                        if (sensorHealth.s1.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+                    } else if (sensorHealthArray[i].includes('SENSOR 4')) {
+
+                        // // // // // // // // // console.log('s4', sensorHealthArray[i]);
+                        sensorHealth['s4'] = sensorHealthArray[i].split('4')[1];
+                        if (sensorHealth.s4.split(' ')[1] === 'ON') {
+                            document.getElementById('s4').style.borderColor = 'green';
+                            // document.getElementById('s4').className = 'Blink';
+
+                        } else {
+                            document.getElementById('s4').style.borderColor = 'red';
+                            // document.getElementById('s4').className = 'Blink';
+
+                        }
+
+                        if (sensorHealth.s4.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+                    } else if (sensorHealthArray[i].includes('SENSOR 5')) {
+
+                        // // // // // // // // // console.log('s5', sensorHealthArray[i]);
+                        sensorHealth['s5'] = sensorHealthArray[i].split('5')[1];
+                        // // // // // // // // // // console.log(sensorHealth.s1.split(' '));
+
+                        if (sensorHealth.s5.split(' ')[1] === 'ON') {
+                            document.getElementById('s5').style.borderColor = 'green';
+                            // document.getElementById('s5').className = 'Blink';
+
+                        } else {
+                            document.getElementById('s5').style.borderColor = 'red';
+                            // document.getElementById('s5').className = 'Blink';
+
+                        }
+
+                        if (sensorHealth.s5.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+
+
+                    } else if (sensorHealthArray[i].includes('SENSOR 6')) {
+
+                        // // // // // // // // // console.log('s6', sensorHealthArray[i]);
+                        sensorHealth['s6'] = sensorHealthArray[i].split('6')[1];
+                        if (sensorHealth.s6.split(' ')[1] === 'ON') {
+                            document.getElementById('s6').style.borderColor = 'green';
+                            document.getElementById('s6').className = 'Blink';
+
+                        } else {
+                            document.getElementById('s6').style.borderColor = 'red';
+                            document.getElementById('s6').className = 'Blink';
+
+                        }
+
+                        if (sensorHealth.s6.split(' ')[2] === 'FALSE') {
+
+                        }
+
+
+
+                    } else {
+                        // // // // // // // // // console.log(sensorHealthArray[i]);
+
+                        data.push(sensorHealthArray[i]);
+                        sensorHealth['others'] = data;
+
+
+
+                    }
+
+
+                }
+
+                // // // // // // // // // console.log(sensorHealth);
+                document.getElementById('systemBattery').innerText = "        " + sensorHealth.others[0].split(' ')[2];
+                document.getElementById('cpuTemp').innerText = "  " + sensorHealth.others[1].split(' ')[2];
+                document.getElementById('systemTemp').innerText = " " + sensorHealth.others[2].split(' ')[2];
+                document.getElementById('cpuCoreVoltage').innerText = " " + sensorHealth.others[3].split(' ')[3];
+
+            }, 2000)
+
+        }
+
+
+
+        function gotoMarkDeadZonePage() {
+            // // // // // // // // // console.log('sffsffse');
+
+
+            ipcRenderer.send('gotoMarkDeadZonePage');
+
+
+        };
+
+        function addAssets() {
+
+            // // // // // // console.log('oksdad');
+            // // // // // console.log(hideShowDeadZoneVal);
+
+            assetsElement = [];
+
+
+
+            activityPositionsData = JSON.parse(localStorage.getItem('activityPositionsData'));
+            // // // // // // // // console.log(activityPositionsData);
+            activityName = Object.keys(activityPositionsData);
+            // // // // // // // // // console.log(activityPositionsData.VEHICLE.length);
+
+            // document.createElement = 
+
+            totalNumberofAssets = 0;
+
+            for (let i = 0; i < activityName.length; i++) {
+
+
+
+
+                if (activityName[i] === 'ACTIVITY') {
+                    for (let k = 0; k < activityPositionsData.ACTIVITY.length; k++) {
+                        totalNumberofAssets++;
+
+                        let x = +activityPositionsData.ACTIVITY[k].split(' ')[1];
+                        let y = +activityPositionsData.ACTIVITY[k].split(' ')[2];
+
+
+                        if (inside([x, y], newPolygonDeadzone) === false || hideShowDeadZoneVal == true) {
+
+
+                            let img = new Image(50, 50);
+                            for (let j = 0; j < polyArray.length; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/man Red.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/man Yellow.png";
+                                    // // // // // // console.log('second zone');
+
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/man yellow.png";
+
+                                } else {
+                                    img.src = "assets/icons/man Red.png";
+                                }
+                            }
+                            // img.src = "https://img.icons8.com/officel/16/000000/human-head.png";
+                            img.style.position = 'absolute';
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.ACTIVITY[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.ACTIVITY[k].split(' ')[2];
+                            img.style.transform = "translate(-50%, -50%)";
+
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+
+                        }
+
+                    }
+
+
+
+                } else if (activityName[i] === 'FOOTSTEPS') {
+                    for (let k = 0; k < activityPositionsData.FOOTSTEPS.length; k++) {
+                        totalNumberofAssets++;
+                        let x = +activityPositionsData.FOOTSTEPS[k].split(' ')[1];
+                        let y = +activityPositionsData.FOOTSTEPS[k].split(' ')[2];
+
+                        if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+                            let img = new Image(40, 40);
+                            for (let j = 0; j < polyArray.length; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "https://img.icons8.com/android/12/000000/left-footprint.png";
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "https://img.icons8.com/android/6/000000/left-footprint.png";
+                                } else {
+                                    img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+                                }
+                            }
+                            // img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+                            img.style.position = 'absolute';
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.FOOTSTEPS[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.FOOTSTEPS[k].split(' ')[2];
+                            img.style.transform = "translate(-50%, -50%)";
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+                        }
+                    }
+
+                } else if (activityName[i] === 'VEHICLE') {
+
+                    for (let k = 0; k < activityPositionsData.VEHICLE.length; k++) {
+                        totalNumberofAssets++;
+                        let x = +activityPositionsData.VEHICLE[k].split(' ')[1];
+                        let y = +activityPositionsData.VEHICLE[k].split(' ')[2];
+
+                        if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+                            // // // // // // // // // console.log('1111111111111111');
+                            let img = new Image(50, 50);
+                            for (let j = 0; j < polyArray.length; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/truck Red.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/truck.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/truck.png";
+
+                                } else {
+                                    img.src = "assets/icons/truck.png";
+                                }
+                            }
+                            // <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                            // img.src = "https://img.icons8.com/dotty/400/000000/half-track-vehicle.png";
+                            img.style.position = 'absolute';
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.VEHICLE[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.VEHICLE[k].split(' ')[2];
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+                        }
+                    }
+
+                } else if (activityName[i] === 'ANIMAL') {
+                    for (let k = 0; k < activityPositionsData.ANIMAL.length; k++) {
+                        totalNumberofAssets++;
+                        let x = +activityPositionsData.ANIMAL[k].split(' ')[1];
+                        let y = +activityPositionsData.ANIMAL[k].split(' ')[2];
+
+                        if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+                            // // // // // console.log('okkkk');
+
+                            let img = new Image(20, 20);
+                            for (let j = 0; j < polyArray.length; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/animal.png";
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/animal.png";
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/animal.png";
+                                } else {
+                                    img.src = "assets/icons/animal.png";
+                                }
+                            }
+                            // img.src = "https://img.icons8.com/color/48/000000/lion.png";
+                            img.style.position = 'absolute';
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.ANIMAL[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.ANIMAL[k].split(' ')[2];
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+                        }
+                    }
+
+                } else if (activityName[i] === 'UNCLASSIFIED') {
+                    for (let k = 0; k < activityPositionsData.UNCLASSIFIED.length; k++) {
+                        totalNumberofAssets++;
+                        let x = +activityPositionsData.UNCLASSIFIED[k].split(' ')[1];
+                        let y = +activityPositionsData.UNCLASSIFIED[k].split(' ')[2];
+
+                        if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+
+
+                            let img = new Image(50, 50);
+                            for (let j = 0; j < newPolyArray.length - 1; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/Location Popup.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/Location Popup.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/Location Popup.png";
+
+                                } else {
+                                    img.src = "assets/icons/Location Popup.png";
+                                }
+                            }
+                            // img.src = "https://img.icons8.com/ios-filled/50/000000/ios-app-icon-shape.png";
+                            img.style.position = 'absolute';
+
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.UNCLASSIFIED[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.UNCLASSIFIED[k].split(' ')[2];
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+                        }
+                    }
+
+                } else if (activityName[i] === 'TUNNEL') {
+                    // // // // // // console.log('tunnel');
+
+                    for (let k = 0; k < activityPositionsData.TUNNEL.length; k++) {
+                        totalNumberofAssets++;
+                        let x = +activityPositionsData.TUNNEL[k].split(' ')[1];
+                        let y = +activityPositionsData.TUNNEL[k].split(' ')[2];
+
+                        if (inside([x, y], newPolygonDeadzone) == false || hideShowDeadZoneVal == true) {
+                            let img = new Image(30, 30);
+                            for (let j = 0; j < polyArray.length; j++) {
+                                if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/worker-with-shovel.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/worker-with-shovel.png";
+
+                                } else if ((inside([x, y], newPolyArray[j])) == false && (inside([x, y], newPolyArray[j + 1])) == true) {
+                                    img.src = "assets/icons/worker-with-shovel.png";
+
+                                } else {
+                                    img.src = "assets/icons/worker-with-shovel.png";
+                                }
+                            }
+                            // img.src = "https://img.icons8.com/android/24/000000/left-footprint.png";
+                            img.style.position = 'absolute';
+                            img.className = 'Blink';
+                            img.style.marginLeft = +activityPositionsData.TUNNEL[k].split(' ')[1];
+                            img.style.marginTop = +activityPositionsData.TUNNEL[k].split(' ')[2];
+                            assetsElement.push({
+                                img,
+                                x,
+                                y
+                            });
+                            document.getElementById('bgg').appendChild(img);
+                        }
+                    }
+
+
+                }
+            }
+
+
+        }
+
+
+
+
+
+
+
+        function hideShowDeadZone(e) {
+
+            // // // // // console.log(e.target.checked);
+            hideShowDeadZoneVal = e.target.checked;
+
+            if (hideShowDeadZoneVal == true) {
+
+                let c = document.getElementById("myCanvas");
+                ctx = c.getContext("2d");
+                ctx.clearRect(0, 0, 300, 150);
+                addAssets();
+
+                document.getElementById('deadZoneText').style.display = 'none';
+
+
+                if (hideShowAssetZoneVal == false) {
+                    ctx.strokeStyle = 'green';
+                    ctx.beginPath();
+                    // ctx.translate(0.5, 0.5);
+                    // ctx.moveTo(0, 0);
+
+
+                    for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+
+
+                        ctx.moveTo(assetZoneAreaVal[i].xVal, assetZoneAreaVal[i].yVal);
+
+                        ctx.lineTo(assetZoneAreaVal[i + 1].xVal, assetZoneAreaVal[i + 1].yVal);
+                        ctx.strokeStyle = 'blue';
+
+                        ctx.stroke();
+
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+            } else {
+
+
+                for (let j = 0; j < assetsElement.length; j++) {
+                    // // // // // console.log(inside([322, 113], newPolygonDeadzone));
+
+                    if (inside([assetsElement[j].x, assetsElement[j].y], polygonDeadzone) == true) {
+                        // // // // // console.log(assetsElement[j]);
+
+                        assetsElement[j].img.style.display = 'none';
+
+                    }
+
+                }
+
+
+                let c = document.getElementById("myCanvas");
+                // // // // // console.log('gotit', assetsElement);
+
+                ctx = c.getContext("2d");
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+                // context = canvas.context2d;    
+                // ctx.translate(0.5, 0.5);
+
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(299, 149);
+
+
+
+
+                // for (let i = 0; i < newPolygonDeadzone.length; i++) {
+                //     // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+                //     let x = newPolygonDeadzone[i][0] * (300 / 784);
+
+                //     let y = newPolygonDeadzone[i][1] * (150 / 537);
+
+                //     let toX = newPolygonDeadzone[i + 1][0] * (300 / 784);
+
+                //     let toY = newPolygonDeadzone[i + 1][1] * (150 / 537);
+
+
+                //     ctx.moveTo(x, y);
+
+
+                //     ctx.lineTo(toX, toY);
+
+
+                //     ctx.stroke();
+
+
+
+                // }
+
+                // ctx.moveTo(newPolygonDeadzone[newTempPolygonDeadzone.length - 1][0] * (300 / 784), newPolygonDeadzone[newTempPolygonDeadzone.length - 1][1] * (150 / 537))
+                // ctx.lineTo(newPolygonDeadzone[0][0] * (300 / 784), newPolygonDeadzone[0][1] * (150 / 537))
+                // ctx.stroke();
+
+
+
+
+
+
+
+
+                for (let i = 0; i < deadZoneAreaVal.length - 1; i++) {
+                    // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+
+                    ctx.moveTo(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+                    ctx.lineTo(deadZoneAreaVal[i + 1].xVal, deadZoneAreaVal[i + 1].yVal);
+
+
+                    ctx.stroke();
+
+
+
+                }
+
+
+            }
+
+
+
+        }
+
+        function hideShowAsset(e) {
+            updateSpeedOAssets();
+            // // // // // // console.log(e.target.checked);
+            hideShowAssetZoneVal = e.target.checked;
+            if (hideShowAssetZoneVal == true) {
+                let c = document.getElementById("myCanvas");
+                // // // // // // // // // // console.log(c);
+
+                ctx = c.getContext("2d");
+                ctx.clearRect(0, 0, 300, 150);
+
+
+
+                if (hideShowDeadZoneVal == false) {
+                    ctx.strokeStyle = 'red';
+                    ctx.beginPath();
+                    // context = canvas.context2d;    
+                    // ctx.translate(0.5, 0.5);
+
+                    // ctx.moveTo(0, 0);
+                    // ctx.lineTo(299, 149);
+
+
+
+                    for (let i = 0; i < deadZoneAreaVal.length - 1; i++) {
+                        // // // // // // // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+
+                        ctx.moveTo(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+
+
+                        ctx.lineTo(deadZoneAreaVal[i + 1].xVal, deadZoneAreaVal[i + 1].yVal);
+
+
+                        ctx.stroke();
+
+
+
+                    }
+                    for (let i = 0; i < assetsElement.length; i++) {
+                        assetsElement[i].img.style.animationDuration = '0s';
+
+                    }
+
+
+                }
+
+
+
+
+
+
+
+
+            } else {
+                let c = document.getElementById("myCanvas");
+                ctx = c.getContext("2d");
+
+
+
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+                ctx.translate(0.5, 0.5);
+                // ctx.moveTo(0, 0);
+
+
+                for (let i = 0; i < assetZoneAreaVal.length - 1; i++) {
+
+
+                    ctx.moveTo(assetZoneAreaVal[i].xVal, assetZoneAreaVal[i].yVal);
+
+                    ctx.lineTo(assetZoneAreaVal[i + 1].xVal, assetZoneAreaVal[i + 1].yVal);
+                    ctx.strokeStyle = 'blue';
+
+                    ctx.stroke();
+
+
+
+
+
+                }
+
+                updateSpeedOAssets();
+
+
+
+
+
+
+
+
+
+
+            }
+
+
+
+
+        }
+
+
+        function updateSpeedOAssets() {
+
+            // // // // // console.log(inside([631, 151], newPolyArray[0]));
+
+
+            let speedDivision = 1 / 4;
+            let blinkSpeedsArray = [];
+            let speed = speedDivision;
+
+            for (let i = 0; i < newPolyArray.length; i++) {
+
+                blinkSpeedsArray.push(speed);
+                speed = speed + speedDivision;
+            }
+            // // // // // // console.log(blinkSpeedsArray);
+            let count = blinkSpeedsArray.length;
+
+            for (let k = 0; k < assetsElement.length; k++) {
+                if (inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[0]) == true) {
+
+
+                    assetsElement[k].img.style.animationDuration = 0.1 + 's';
+                    // // // // // // // // console.log(assetsElement[k].img.style.animationDuration);
+
+                }
+            }
+
+            // // // // // // console.log(newPolyArray);
+
+
+            for (let z = 0; z < newPolyArray.length - 1; z++) {
+
+                for (let k = 0; k < assetsElement.length; k++) {
+                    if ((inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[z])) == false && (inside([assetsElement[k].x, assetsElement[k].y], newPolyArray[z + 1])) == true) {
+                        assetsElement[k].img.style.animationDuration = blinkSpeedsArray[z] + 's';
+
+
+                    }
+                }
+
+
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

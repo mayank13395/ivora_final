@@ -1,0 +1,531 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IVORA</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+        .navIvora {
+            background-color: #4C5E44;
+        }
+
+        .navcontent a {
+            color: white;
+        }
+
+        a {
+            color: white;
+        }
+
+        .sensorstyle {
+            margin-top: 20%;
+            margin-bottom: 20%;
+            margin-left: 19%;
+            margin-right: 15%;
+            text-align: center;
+            letter-spacing: 2px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .btnn {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 185px;
+            height: 60px;
+            margin: 10px;
+        }
+
+        .btnSave {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 109px;
+            height: 57px;
+            margin: 5px;
+            /* margin-top: 44px; */
+            /* float: right; */
+        }
+
+        .btnIconSave {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 110px;
+            height: 40px;
+            margin: 5px;
+            /* margin-top: 44px; */
+            /* float: right; */
+        }
+
+        .bg {
+            float: left;
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 10px;
+            margin-left: 30px;
+            /* height: 400px;
+            width: 583px; */
+            height: 500px;
+            width: 728px;
+            position: relative;
+        }
+
+        .nav .open>a,
+        .nav .open>a:focus,
+        .nav .open>a:hover {
+            background-color: #eee;
+            /* border-color: #337ab7; */
+        }
+
+        .modal {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            bottom: 0;
+            left: 0;
+            z-index: 10040;
+            overflow: auto;
+            overflow-y: auto;
+        }
+
+        .modalicon {
+            position: absolute;
+            top: 100px;
+            right: 100px;
+            bottom: 0;
+            left: 0;
+            z-index: 10040;
+            overflow: auto;
+            overflow-y: auto;
+        }
+
+        .slidecontainer {
+            width: 100%;
+            margin-top: 45px;
+            cursor: pointer;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 15px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            cursor: pointer;
+        }
+
+        .slider:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+        }
+
+        .iconImage {
+            position: absolute;
+        }
+
+        .nav .open>a,
+        .nav .open>a:focus,
+        .nav .open>a:hover {
+            background-color: #2b5422;
+            color: white;
+            cursor: pointer
+        }
+
+        .nav>li>a:focus,
+        .nav>li>a:hover {
+            text-decoration: none;
+            background-color: #4C5E44;
+            color: #000;
+        }
+
+        .point {
+            border: 3px solid;
+            border-radius: 20px;
+        }
+
+        .Blink {
+            animation: blinker cubic-bezier(.5, 0, 1, 1) infinite alternate;
+        }
+
+        @keyframes blinker {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        .iconModalPopup {
+            width: 100px;
+        }
+
+        .slidecontainerasset {
+            margin: 70px 0;
+        }
+
+
+
+        .nav>ul>ul>a :hover {
+
+            color: #2b5422;
+            background-color: #2b5422;
+
+
+        }
+    </style>
+</head>
+
+<body onload="getSensorLocationAndShow()" background="./assets/background.jpg" style="overflow: hidden">
+    <div>
+        <nav class="navbar navIvora ">
+            <div class="container-fluid" style="margin: 0px 10px;">
+                <div class="navbar-header navcontent" style=" text-align: center">
+                    <a class="navbar-brand" href="#">IVORA</a>
+                </div>
+
+
+                <ul class="nav dropmenu navbar-nav navbar-right">
+                    <li><a id="dropdown" class="  dropdown-toggle" data-toggle="dropdown"
+                            style="word-spacing: 0px;letter-spacing: 3px;cursor: pointer; " href="#"><span
+                                class="glyphicon glyphicon-cog"></span>
+                            SETTINGS</a>
+                        <ul style="background-color:#56754B " class="dropdown-menu">
+                            <li><a class="setting-item-onhover"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white  " href="#"
+                                    data-toggle="modal" data-target="#exampleModal">CHANGE SENSITIVITY </a></li>
+                            <li><a class="setting-item-onhover" id="gotoMarkAssetZonePage"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">MARK
+                                    ASSET</a></li>
+                            <li><a class="setting-item-onhover"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white  " href="#"
+                                    data-toggle="modal" data-target="#assetZoneChanger">CHANGE ASSET ZONE AREA</a></li>
+                            <li><a class="setting-item-onhover" id="gotolatlngPage"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">UPDATE
+                                    MAP</a></li>
+                            <li><a class="setting-item-onhover" id="markdeadZone" onclick="gotoMarkDeadZonePage()"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white " href="#">MARK DEAD
+                                    ZONE</a></li>
+                            <li><a class="setting-item-onhover"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white  " href="#"
+                                    data-toggle="modal" data-target="#iconModal">CHANGE ICON SIZE</a></li>
+                            <li style="margin-left: 20px;padding-top: 3px">
+                                <input id="hideshowbtn" disabled onchange="hideShowDeadZone(event)" style="float: left"
+                                    type="checkbox">
+                                <p class="setting-item-onhover"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white;float: left;margin-left: 10px;margin-bottom: 2px "
+                                    href="#">HIDE DEAD ZONE
+                                </p>
+                            </li>
+                            <div style="clear: both"></div>
+
+
+                            <li class="setting-item-onhover" style="margin-left: 20px;padding-top: 3px">
+                                <input onchange="hideShowAsset(event)" style="float: left" type="checkbox">
+                                <p id="assethideshow" onclick="hideShowAsset()"
+                                    style="word-spacing: 0px;letter-spacing: 3px;color: white;float: left;margin-left: 10px "
+                                    href="#">HIDE ASSET ZONE
+                                </p>
+                            </li>
+
+
+                        </ul>
+
+
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: #30432C;height: 260px;" class="modal-content">
+                <div class="modal-body">
+                    <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 style="color: white" class="modal-title" id="exampleModalLabel">Choose Sensitivity</h3>
+
+
+
+                    <div class="slidecontainer">
+                        <input type="range" min="0.1" max="2" step="0.1" value="0.2" class="slider" id="myRange">
+                        <p style="color: white;
+            text-align: center;
+            margin: 25px;
+            font-size: 20px;">Value: <span id="demo"></span></p>
+                    </div>
+
+                    <!-- <button type="button" class="btnSave" data-dismiss="modal">Close</button> -->
+
+                    <div style="margin-left:445px;width:190px">
+                        <button type="button" class="btnSave" data-dismiss="modal"
+                            onclick="saveSensitivityData()">Save</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: #30432C;height: 200px;
+            width: 400px;" class="modal-content">
+                <div class="modal-body">
+                    <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 style="color: white" class="modal-title" id="exampleModalLabel">Choose Size</h3>
+
+
+
+                    <div class="slidecontainer">
+                        <input type="range" min="10" max="70" step="5" value="30" class="slider" id="iconSize">
+
+                    </div>
+
+                    <!-- <button type="button" class="btnSave" data-dismiss="modal">Close</button> -->
+
+                    <div style="width:377px;margin-right: 150px">
+
+
+                        <p style="color: white;float: left;
+                             
+                           
+                             font-size: 20px;">Value: <span id="iconVal"></span></p>
+
+                        <button style="margin-left:250px;float:right;" type="button" class="btnIconSave"
+                            data-dismiss="modal" onclick="changeIconSize()">Save</button>
+
+
+
+                    </div>
+                    <div style="clear: both"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" modal fade" id="assetZoneChanger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div style="background-color: #30432C;height: 440px;
+            width: 400px;" class="modal-content">
+                <div class="modal-body">
+                    <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 style="color: white" class="modal-title" id="exampleModalLabel">CHANGE ASSET ZONE</h3>
+
+                    <div class="slidecontainerasset">
+                        <input type="range" min="30" max="100" step="5" value="30" class="slider" id="d1Val">
+                        <p style="color: white;float: left;font-size: 20px;margin-top: 10px">d1: <span
+                                id="d1ValtoShow"></span></p>
+                    </div>
+                    <div class="slidecontainerasset">
+                        <input type="range" min="150" max="300" step="5" value="30" class="slider" id="d2Val">
+                        <p style="color: white;float: left;font-size: 20px;margin-top: 10px">d2: <span
+                                id="d2ValtoShow"></span></p>
+                    </div>
+                    <div class="slidecontainerasset">
+                        <input type="range" min="350" max="600" step="5" value="30" class="slider" id="d3Val">
+                        <p style="color: white;float: left;font-size: 20px;margin-top: 10px">d3: <span
+                                id="d3ValtoShow"></span></p>
+                    </div>
+
+                    <!-- <button type="button" class="btnSave" data-dismiss="modal">Close</button> -->
+
+                    <div style="width:377px;margin-right: 150px">
+
+                        <!-- <p style="color: white;float: left;
+                            
+                            font-size: 20px;">Value: <span id="iconVal"></span></p> -->
+
+                        <button style="margin-left:250px;float:right;" type="button" class="btnIconSave"
+                            data-dismiss="modal" onclick="changeAssetZoneArea()">Save</button>
+
+
+
+                    </div>
+                    <div style="clear: both"></div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div id="bgg" class="bg">
+            <img style="width: 100%;height: 100%;position: absolute;" src="C:/ivoradatafiles/input/map.jpg">
+            <canvas id="myCanvas" style=" height: 500px;width: 728px; position: absolute;"></canvas>
+        </div>
+        <div style="float: right; width: 170px; margin-top: 16px;">
+            <div style="margin: auto;
+                text-align: center;
+                letter-spacing: 1px;
+                font-size: 20px;
+                color: white;
+                width: 100px;">
+                SENSOR HEALTH
+            </div>
+
+            <div class="sensorstyle">
+                <div id="s1" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 1
+                </div>
+
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s2" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 2
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s3" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 3
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s4" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 4
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s5" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 5
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="sensorstyle">
+                <div id="s6" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    SENSOR 6
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <!-- <div style="text-align:center">
+        Sensor logs
+      </div> -->
+
+        </div>
+
+
+    </div>
+
+    <div style="clear: both"></div>
+
+    <div style="margin-top: 20px;color: white;text-align: center">
+
+        <div style="width: 25%;float: left">
+            <div>
+                <img src="https://img.icons8.com/officexs/48/000000/medium-battery.png"><span
+                    style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="systemBattery"></span>
+            </div>
+            <p style="margin-top: 10px">SYSTEM BATTERY </p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/color/47/000000/smartphone-cpu.png"><span
+                    style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="cpuTemp"></span>
+            </div>
+            <p style="margin-top: 10px">CPU TEMPERATURE</p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/color/48/000000/system-task.png"><span
+                    style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="systemTemp"></span>
+            </div>
+            <p style="margin-top: 10px">SYSTEM TEMPERATURE</p>
+        </div>
+
+        <div style="width: 25%;float: left;">
+            <div>
+                <img src="https://img.icons8.com/flat_round/48/000000/electro-devices--v3.png"><span
+                    style="color: #68ff84; font-size: 16px; vertical-align: middle;" id="cpuCoreVoltage"></span>
+            </div>
+
+            <p style="margin-top: 10px">CPU VOLTAGE</p>
+        </div>
+
+        <!-- <button class="btnn" id="gotoMapPage">MARK ASSET</button>
+    <button class="btnn" id="gotoMapPage" onclick="createAnotherSensor()">SHOW HISTORY</button>
+    <button class="btnn" id="gotoMapPage" onclick="createAnotherSensor()">MARK DEAD ZONE</button> -->
+
+    </div>
+
+    <div style="clear: both"></div>
+
+    <script src="js/mainDashBoard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            /* height: 900px;
+            width: 900px; */
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            /* margin-top: 50px; */
+            /* top: 0px; */
+            /* bottom: 0px; */
+            /* right: 0px; */
+            /* left: 0px; */
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .bg {
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 40px;
+            /* height: 553px;
+            width: 800px; */
+            width: 600px;
+            height: 414.75px;
+        }
+
+        .btnnn2 {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 120px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            /* display: block; */
+            margin-left: 50px;
+            /* transform: translateX(-50%); */
+            /* margin-bottom: 30px; */
+        }
+
+        .btnnn2:hover {
+            background-color: #212e1e;
+        }
+
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #939723;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src=""></script>
+
+</head>
+
+<body background="./assets/background.jpg" style="overflow: hidden">
+
+    <!-- <script src="js/canvas2image.js"></script> -->
+
+    <script>
+        const fs = require('fs');
+
+        var map;
+        var marker;
+        var htmlToImage = require('html-to-image');
+        var base64ToImage = require('base64-to-image');
+        var sizeOf = require('image-size');
+        let zoomValue;
+        let getBounds;
+        let getCenterLAt;
+        let getCenterLong;
+        let mapURL;
+        let mapImgUrl;
+        var domtoimage = require('dom-to-image');
+        latCentre = 53.4055429;
+        longCentre = -2.9976502;
+        var sensorLocations;
+        let markers = [];
+        let savedMapImageWidth;
+        let savedMapImageHeight;
+
+        function initMap() {
+            sensorLocations = JSON.parse(localStorage.getItem('sensorData'));
+
+            map = new google.maps.Map(
+                document.getElementById('map'), {
+                    mapTypeId: 'satellite',
+                    disableDefaultUI: true
+                }
+            );
+
+            var infowindow = new google.maps.InfoWindow({})
+
+            for (let i = 0; i < sensorLocations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: {
+                        lat: +sensorLocations[i].lat,
+                        lng: +sensorLocations[i].lng
+                    }
+                });
+
+                markers.push(marker);
+                marker.setMap(map);
+
+            }
+
+            var bounds = new google.maps.LatLngBounds();
+            for (var i = 0; i < markers.length; i++) {
+                bounds.extend(markers[i].getPosition());
+            }
+
+            let z = map.fitBounds(bounds);
+        }
+
+        function saveFunc() {
+
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+
+            var lat0 = map.getBounds().getNorthEast().lat();
+            var lng0 = map.getBounds().getNorthEast().lng();
+            var lat1 = map.getBounds().getSouthWest().lat();
+            var lng1 = map.getBounds().getSouthWest().lng();
+            
+            let mapbounds = {
+                lat0,
+                lng1,
+                lat1,
+                lng0
+            }
+
+            localStorage.setItem('mapbounds', JSON.stringify(mapbounds));
+
+            // CHANGE TO 'MAP' HERE
+            var node = document.getElementById('map');
+
+            // SCALE ACCORDING TO DESIRED
+            htmlToImage.toPng((node), {
+                height: 400,
+                width: 583
+            })
+            .then(function (dataUrl) {
+                var base64Data = dataUrl.replace(/^data:image\/png;base64,/, "");
+
+                fs.writeFile("C:/ivoradatafiles/input/map.jpg", base64Data, 'base64', function(err) {
+                    // console.log(err);
+                });
+            
+                setTimeout(() => {
+                    var dimensions = sizeOf('C:/ivoradatafiles/input/map.jpg');
+                    savedMapImageWidth = dimensions.width;
+                    savedMapImageHeight = dimensions.height;
+
+                    // let overallDiffWid = lat1 - lat0;
+                    // let diffPerPixelWid = overallDiffWid / savedMapImageWidth;
+
+                    // let overallDiffHt = lng0 - lng1;
+                    // let diffPerPixelHt = overallDiffHt / savedMapImageHeight;
+
+                    var verticalFactor = savedMapImageHeight/(lat0 - lat1);
+
+                    var horizontalFactor = savedMapImageWidth/(lng0 - lng1);
+
+                    let data = `0 0 ${lat0} ${lng1}\n${savedMapImageWidth} ${savedMapImageHeight} ${lat1} ${lng0}\n${savedMapImageWidth} ${savedMapImageHeight} ${lat1} ${lng0}\n${Math.round((sensorLocations[0].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[0].lng - lng1)/diffPerPixelHt)} ${sensorLocations[0].lat} ${sensorLocations[0].lng}\n${Math.round((sensorLocations[1].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[1].lng - lng1)/diffPerPixelHt)} ${sensorLocations[1].lat} ${sensorLocations[1].lng}\n${Math.round((sensorLocations[2].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[2].lng - lng1)/diffPerPixelHt)} ${sensorLocations[2].lat} ${sensorLocations[2].lng}\n${Math.round((sensorLocations[3].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[3].lng - lng1)/diffPerPixelHt)} ${sensorLocations[3].lat} ${sensorLocations[3].lng}\n${Math.round((sensorLocations[4].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[4].lng - lng1)/diffPerPixelHt)} ${sensorLocations[4].lat} ${sensorLocations[4].lng}\n${Math.round((sensorLocations[5].lat - lat0)/diffPerPixelWid)} ${Math.round((sensorLocations[5].lng - lng1)/diffPerPixelHt)} ${sensorLocations[5].lat} ${sensorLocations[5].lng}\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n0 0 0 0\n${savedMapImageWidth} ${savedMapImageHeight}  ${lat0} ${lng1}\n${savedMapImageWidth} ${savedMapImageHeight}  ${lat1} ${lng0} Spare Spare`
+                    
+                    let sensorLocationPosition = {
+                        's1': [`${lat0 - sensorLocations[0].lat}`, `${sensorLocations[0].lng - lng1}`],
+                        's2': [`${lat0 - sensorLocations[1].lat}`, `${sensorLocations[1].lng - lng1}`],
+                        's3': [`${lat0 - sensorLocations[2].lat}`, ` ${sensorLocations[2].lng - lng1} `],
+                        's4': [`${lat0 - sensorLocations[3].lat}`, ` ${sensorLocations[3].lng - lng1}`],
+                        's5': [`${lat0 - sensorLocations[4].lat}`, ` ${sensorLocations[4].lng - lng1} `],
+                        's6': [`${lat0 - sensorLocations[5].lat}`, `${sensorLocations[5].lng - lng1} `]
+                    }
+
+                    localStorage.setItem('sensorLocationPosition', JSON.stringify(sensorLocationPosition));
+                    fs.writeFile("C:/ivoradatafiles/input/map.txt", data, function (err) {
+                        if (err) {
+                            return
+                        }
+                    });
+                    
+                    fs.writeFile("C:/ivoradatafiles/input/customsettings.txt", "Sensitivity 0.7", function (err) {
+                        if (err) {
+                            return
+                        }
+                        alert('File Creation Successful!')
+                    });
+
+                }, 2000);
+
+            })
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtAF1d2LpQyYrUTkhQK3Yv5r-YWPlHSgw&callback=initMap"
+        async defer></script>
+    <!-- <div id="main"> -->
+
+    <div id="main" class="bg">
+        <div id="map"></div>
+    </div>
+
+
+    <div id="submit" style="text-align:center; margin-top: 55px;">
+        <div style="position:relative; transform: translateX(-32px);">
+            <button id="gotoPreviousPage" class="btnnn2 ">Back</button>
+            <button id="gotoMapPage" onclick="saveFunc()" class="btnnn2 ">Submit</button>
+        </div>
+    </div>
+    <!-- </div> -->
+
+    <div style="display: none" id="loader"></div>
+
+    <script src="js/mapchoose.js"></script>
+</body>
+
+</html>

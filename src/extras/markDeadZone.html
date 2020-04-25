@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            /* height: 900px;
+            width: 900px; */
+            height: 100%;
+            width: 100%;
+            margin: auto;
+            /* margin-top: 50px; */
+            /* top: 0px; */
+            /* bottom: 0px; */
+            /* right: 0px; */
+            /* left: 0px; */
+        }
+
+
+        .sensorstyle {
+            margin-top: 10%;
+            margin-bottom: 10%;
+            margin-left: 10%;
+            margin-right: 15%;
+            text-align: center;
+            letter-spacing: 2px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* .bg {
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 40px;
+            height: 553px;
+            width: 800px;
+        } */
+
+        .bg {
+            float: left;
+            border: 8px solid #56754B;
+            margin: auto;
+            margin-top: 10px;
+            margin-left: 30px;
+            height: 414.75px;
+            width: 600px;
+            position: relative;
+        }
+
+        .btnnn2 {
+            border: 3px solid #939723;
+            border-radius: 5px;
+            background-color: #30432C;
+            color: white;
+            text-align: center;
+            width: 120px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            /* display: block; */
+            margin-left: 50px;
+            /* transform: translateX(-50%); */
+            /* margin-bottom: 30px; */
+        }
+
+        .btnnn2:hover {
+            background-color: #212e1e;
+        }
+
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #939723;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        .point {
+            border: 1px solid white;
+            border-radius: 20px;
+        }
+
+        .childClass1 {
+            float: left;
+            border: 10px solid white;
+            border-radius: 20px;
+        }
+
+        .childClass2 {
+            float: right;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src=""></script>
+
+</head>
+
+<body onload="onPageAppear()" background="./assets/background.jpg" style="overflow: hidden;">
+
+    <script src="js/canvas2image.js"></script>
+
+    <div>
+        <div id="bgg" class="bg">
+
+            <img style="width: 100%;height: 100%;position: absolute;" src="C:/ivora-data/map.png">
+            <canvas id="myCanvas" style=" height: 400px;width: 584px;position: absolute;"></canvas>
+
+        </div>
+        <div id="addDeadZoneElement" style="float: right; width: 170px; margin-top: 16px;">
+            <div style="margin: auto;
+      text-align: center;
+      letter-spacing: 1px;
+      font-size: 20px;
+      color: white;
+      width: 100px;">
+                DEADZONES
+            </div>
+
+            <!-- <div class="sensorstyle">
+                <div id="s1" style=" float: left;border: 10px solid white; border-radius: 20px;">
+
+                </div>
+                <div style="float: right">
+                    DeadZone 1
+                </div>
+
+            </div>
+            <div style="clear: both"></div> -->
+
+
+            <!-- <div style="text-align:center">
+        Sensor logs
+      </div> -->
+
+        </div>
+
+
+    </div>
+
+    <div style="clear: both"></div>
+
+
+    <div id="submit" style="text-align:center; margin-top: 55px;">
+        <div style="position:relative; transform: translateX(-32px);">
+            <!-- <button id="gotoPreviousPage" class="btnnn2 ">MARK</button> -->
+            <button id="gotoMapPage" onclick="clearDeadZone()" class="btnnn2 ">CLEAR</button>
+            <button id="gotoDashBoardPage" onclick="saveDeadZone()" class="btnnn2 ">SUBMIT</button>
+            <button disabled id="addDeadZone" onclick="addDeadZone()" class="btnnn2 ">ADD</button>
+        </div>
+
+
+    </div>
+
+
+    <div style="display: none" id="loader"></div>
+
+    <script>
+        const {
+            ipcRenderer
+        } = require('electron');
+        let pointsArray = [];
+        let deadZoneArray = {};
+        let clickedCount = 0;
+        var ctx;
+        var c;
+        let deadZoneAreaVal;
+        let addedElements = [];
+        let deadzoneCountLength;
+
+        function onPageAppear() {
+        //     // deadZoneAreaVal = JSON.parse(localStorage.getItem('deadzone'));
+        //     // // console.log(deadZoneAreaVal);
+
+        
+            
+
+
+            let  tempdeadZoneArray = JSON.parse(localStorage.getItem('getDeadZoneArray'));
+                // console.log(tempdeadZoneArray);
+                if(tempdeadZoneArray){
+                    deadZoneArray = tempdeadZoneArray;
+                    // console.log('ggggggggggggg');
+                    
+                }
+
+                
+       
+
+                
+       
+
+
+            let DynamicaddedElm = JSON.parse(localStorage.getItem('DynamicaddedElm'));
+            // console.log(DynamicaddedElm);
+            deadzoneCountLength = DynamicaddedElm.length;
+
+
+            if (DynamicaddedElm) {
+
+                addedElements = DynamicaddedElm;
+
+
+                for (let i = 0; i < DynamicaddedElm.length; i++) {
+                    let el = document.createElement('div');
+                    document.getElementById('addDeadZoneElement').appendChild(el);
+                    el.outerHTML = DynamicaddedElm[i];
+                    
+                }
+
+                for (let i = 1; i <= DynamicaddedElm.length; i++) {
+                    let el = document.getElementById('deadzone'+i);
+                    el.onclick = showDeadZone;
+                    // console.log(el);
+                    
+                    
+                }
+            }
+
+        }
+
+        //     // for (var i = 0; i < tempsave.length; i++) {
+        //     //     var element = document.createElement('div');
+            //     document.getElementById('element-container').appendChild(element);
+            //     element.outerHTML = tempsave[i];
+            // }
+
+        
+
+  
+ 
+        document.getElementById('myCanvas').onclick = function drawPoint(evt) {
+
+            if (clickedCount > 2) {
+                document.getElementById("addDeadZone").disabled = false;
+
+            }
+            clickedCount++;
+            // // console.log(clickedCount);
+
+
+            // // console.log('xdfvdxgxdgsdgsdgsdgs', evt);
+            var x = evt.pageX - $('#myCanvas').offset().left;
+            var y = evt.pageY - $('#myCanvas').offset().top;
+
+            // console.log(x, y);
+            pointsArray.push({
+                x,
+                y,
+                'xVal': x * (300 / 584),
+                'yVal': y * (150 / 400)
+            });
+
+
+            let point = document.createElement('div');
+            point.style.position = "absolute";
+            point.className = 'point';
+            point.id = 'point' + clickedCount;
+            point.style.marginLeft = x + "px";
+            point.style.marginTop = y + "px";
+            // // console.log(point.style.marginLeft);
+
+            document.getElementById('bgg').appendChild(point);
+
+            if (clickedCount > 1) {
+                makeLine(clickedCount);
+
+            }
+
+            // deadZoneArray.push(pointsArray);
+
+
+        }
+
+        function makeLine(clickedCount) {
+            // // console.log('fsdfsfefsefwef');
+
+
+            let firstPoint = pointsArray[clickedCount - 2];
+            let finalPoint = pointsArray[clickedCount - 1];
+            // // console.log(firstPoint, finalPoint);
+
+
+            c = document.getElementById("myCanvas");
+            // // // console.log(c);
+
+            ctx = c.getContext("2d");
+            ctx.strokeStyle = 'red';
+            ctx.beginPath();
+
+            // ctx.moveTo(0, 0);
+            // ctx.lineTo(299, 149);
+            ctx.moveTo(firstPoint.xVal, firstPoint.yVal);
+            ctx.lineTo(finalPoint.xVal, finalPoint.yVal);
+            ctx.stroke();
+
+
+        }
+
+        function clearDeadZone() {
+
+            ctx.clearRect(0, 0, 300, 150);
+
+            for (let i = 1; i < clickedCount + 1; i++) {
+                let id = 'point' + i;
+                document.getElementById(id).remove();
+            }
+
+            clickedCount = 0;
+            pointsArray = [];
+            let deadzoneobjkeys = Object.keys(deadZoneArray);
+            if (deadzoneobjkeys.length > 0) {
+                for (let i = 0; i < deadzoneobjkeys.length; i++) {
+                    document.getElementById(deadzoneobjkeys[i]).style.borderColor = '';
+                }
+            }
+
+
+
+        }
+
+          
+        let count = 1;
+        let nextCount = 1;
+        function addDeadZone() {
+            if(deadzoneCountLength){
+                count = deadzoneCountLength+nextCount;
+
+            }
+           
+            deadZoneArray['deadzone' + count] = pointsArray;
+           
+            // console.log('clicked', deadZoneArray);
+            let deadzone = document.createElement('div');
+            deadzone.className = 'sensorstyle';
+            deadzone.id = 'd' + count;
+            // deadzone.onclick = showDeadZone;
+            let child1 = document.createElement('div');
+            child1.className = 'childClass1';
+            child1.id = 'deadzone' + count;
+            child1.onclick = showDeadZone;
+            deadzone.appendChild(child1);
+            let child2 = document.createElement('div');
+            child2.className = 'childClass2';
+            child2.innerText = 'DeadZone ' + count;
+            deadzone.appendChild(child2);
+            let child3 = document.createElement('div');
+            child3.style.clear = 'both';
+            deadzone.appendChild(child3);
+            document.getElementById('addDeadZoneElement').appendChild(deadzone);
+            count++;
+            nextCount++;
+
+
+            pointsArray = [];
+            // let c = document.getElementById("myCanvas");
+            //   ctx = c.getContext("2d");
+            //   ctx.clearRect(0, 0, 300, 150);
+            clearDeadZone();
+            document.getElementById("addDeadZone").disabled = true;
+            let clone = deadzone.cloneNode(true);
+            addedElements.push(clone.outerHTML);
+            // console.log(addedElements);
+
+            localStorage.setItem('DynamicaddedElm', JSON.stringify(addedElements));
+            localStorage.setItem('getDeadZoneArray', JSON.stringify(deadZoneArray));
+
+
+        }
+        let deadZoneArrayTemp = deadZoneArray;
+
+        function showDeadZone(evt) {
+            // console.log('clickedd', evt.srcElement.id);
+            let id = evt.srcElement.id;
+            // console.log(id);
+            // // console.log(document.getElementById(id).style);
+
+            if (!document.getElementById(id).style.borderColor) {
+                document.getElementById(id).style.borderColor = 'blue';
+                // // console.log('okkk');
+                // // console.log(document.getElementById(id).style.backgroundColor);
+                let c = document.getElementById("myCanvas");
+                // // console.log(id);
+
+                ctx = c.getContext("2d");
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+                // console.log(deadZoneArray);
+
+
+                for (let i = 0; i < deadZoneArray[id].length - 1; i++) {
+                    // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+                    ctx.moveTo(deadZoneArray[id][i].xVal, deadZoneArray[id][i].yVal);
+                    ctx.lineTo(deadZoneArray[id][i + 1].xVal, deadZoneArray[id][i + 1].yVal);
+                    ctx.stroke();
+                    // // console.log('rrrrrrr');
+                }
+
+
+            }
+            else {
+                document.getElementById(id).style.borderColor = '';
+                let c = document.getElementById("myCanvas");
+                // // console.log(id);
+
+                ctx = c.getContext("2d");
+                ctx.clearRect(0, 0, 300, 150);
+                ctx.strokeStyle = 'red';
+                ctx.beginPath();
+
+                let deadzoneKeys = Object.keys(deadZoneArray);
+                // console.log('deadzonekeys', deadzoneKeys);
+
+                for (let j = 0; j < deadzoneKeys.length; j++) {
+                    // console.log(deadzoneKeys[j]);
+                    if (document.getElementById(deadzoneKeys[j]).style.borderColor) {
+                        // deadZoneArrayTemp[deadzoneKeys[j]] = deadZoneArray[deadzoneKeys[j]];
+                        // // console.log(deadZoneArray[deadzoneKeys[j]],deadzoneKeys[j], document.getElementById(deadzoneKeys[j]).style.borderColor);
+                        for (let i = 0; i < deadZoneArray[deadzoneKeys[j]].length - 1; i++) {
+                            // // console.log(deadZoneAreaVal[i].xVal, deadZoneAreaVal[i].yVal);
+                            ctx.moveTo(deadZoneArray[deadzoneKeys[j]][i].xVal, deadZoneArray[deadzoneKeys[j]][i].yVal);
+                            ctx.lineTo(deadZoneArray[deadzoneKeys[j]][i + 1].xVal, deadZoneArray[deadzoneKeys[j]][i + 1].yVal);
+                            ctx.stroke();
+
+                            // // console.log('rrrrrrrttt');
+                        }
+                    }
+                }
+            }
+            // // console.log('deadzonelistTOSEND', deadZoneArray);
+            // deadZoneArray = deadZoneArrayTemp;
+        }
+
+
+        function saveDeadZone() {
+            let deadzoneArrayToSend = {};
+
+
+            // console.log('called');
+
+            if (pointsArray.length > 0) {
+                localStorage.setItem('deadzone', JSON.stringify(pointsArray));
+                // localStorage.setItem('deadzoneArray', JSON.stringify(deadZoneArray));
+            }
+
+
+            let tempkey = Object.keys(deadZoneArray);
+            for (let i = 0; i < tempkey.length; i++) {
+                if (document.getElementById(tempkey[i]).style.borderColor) {
+                    deadzoneArrayToSend[tempkey[i]] = deadZoneArray[tempkey[i]];
+                }
+            }
+
+            // console.log('deadzoneArrayToSend', deadzoneArrayToSend);
+
+            localStorage.setItem('deadzoneArray', JSON.stringify(deadzoneArrayToSend));
+
+            // document.getElementById('').disabled = false;
+
+            ipcRenderer.send('gotoDashBoard');
+
+            // document.getElementById('gotoDashBoardPage').addEventListener('click', () => {
+            //     ipcRenderer.send('gotoDashBoard');
+            //     // // console.log('window button clicked');
+            // });
+
+            // localStorage.setItem('DynamicallyaddedElements', JSON.stringify(addedElements));
+
+        }
+    </script>
+
+
+    <!-- <script src="js/mapchoose.js"></script> -->
+</body>
+
+</html>

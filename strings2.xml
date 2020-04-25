@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">seggro_ui</string>
+    <string name="title_activity_new_old_chat">NewOldChat</string>
+    <string name="tab_text_1">New</string>
+    <string name="tab_text_2">Previous Chat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_image_data">image_data</string>
+    <string name="title_activity_image_questions">ImageQuestions</string>
+    <string name="title_activity_latlong">Latlong</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_dummy_tablayout">dummyTablayout</string>
+
+    <string name="question1"><b><i>How old is your plant ?</i></b></string>
+    <string name="question2"><b><i>Is there yellow part around the spot
+ ?</i></b></string>
+    <string name="question3"><b><i>. Does the spots on leaf look like this ?</i></b></string>
+    <string name="title_activity_loader">Loader</string>
+
+    <!--    bacterial spot-->
+
+    <string-array name = "bacterial_spot_chemical">
+        <item>  <b><i>Spray streptomycin sulfate 9% + tetracycline hydrochloride 1% SP solution (streptocycline) 40-100 ppm in fields after the appearance of first true leaves. Two sprays, one before transplanting (seed beds) and another after transplanting (main field).
+</i></b> </item>
+
+    </string-array>
+
+
+    <!--leaf curl-->
+
+    <string-array name = "leaf_curl_seedstage_cultural">
+        <item> <b><i>Raising nursery in protected condition (with net of sufficient mesh size to prevent the entry of vector, whitefly)</i></b>
+    </item>
+        <item> <b><i>Seeds from disease free healthy plants should be selected for sowing.
+</i></b></item>
+        <item> <b><i>In the nursery all the infected plants should be removed carefully and destroyed. Seedlings infected with the viral disease should not be used for transplanting.</i></b>
+ </item>
+    </string-array>
+
+    <string-array name = "leaf_curl_seedstage_chemical">
+        <item> <b><i>Before transplanting dip the roots of seedlings for 15 minutes in  12 17.8 % SL @ 60-70 ml in 200 l of water/acre for management of leaf curl vector.</i></b>
+    </item>
+
+
+    </string-array>
+
+    <string-array name="leaf_curl_vegstage_cultural">
+
+        <item>  <b><i>Field sanitation, roguing of affected plants</i></b></item>
+     <item> <b><i>Raise barrier crops-cereals (maize or sorghum) around the field.</i></b> </item>
+     <item> <b><i>Peppermint can be used as repellant plant for whitefly.</i></b> </item>
+      <item> <b><i>Yellow sticky traps \n cards @ 10/acre may reduce the whiteflies population
+</i></b>  </item>
+    </string-array>
+
+
+
+    <string-array name="leaf_curl_vegstage_biological">
+      <item>  <b><i>Conserve parasitoids such as Encarsia sp. (nymphal and pupal), Eretmocerus spp (nymphal and pupal). etc.</i></b>
+   </item>
+        <item>  <b><i>Conserve predators such as Dicyphus hesperus, (mirid bug), dragonfly, spider, robber fly, praying mantis, fire ants, coccinellids, lace wings, big eyed bugs (Geocoris sp) etc.</i></b>
+       </item>
+        <item>  <b><i>Spray neem seed kernel extract (NSKE) 5% \n azadirachtin 5% W/W neem extract concentrate @ 80 g in 160 l of water/acre</i></b>
+ </item>
+    </string-array>
+
+
+    <string-array name="leaf_curl_vegstage_chemical">
+     <item><b><i>Spray dimethoate 30% EC @ 396 ml in 200-400 l of water/acre \n imidacloprid 17.8 SL @ 60-70 ml in 200 l of water/acre \n thiamethoxam 25 WG @ 80 g in 200 l of water/acre \n carbofuran 3% CG @ 16,000 g/acre \n malathion 50% EC @ 600 ml in 200-400 l of water/acre \n oxydemeton-methyl 25% EC @ 400 ml in 200-400 l of water/acre \n phorate 10% CG @ 6,000 g/acre \n spiromesifen 22.9% SC @ 250 ml in 200 l of water/acre</i></b>
+  </item>
+    </string-array>
+
+    <string-array name="leaf_curl_repstage_cultural">
+      <item> <b><i>Staking of plants to avoid touching fruits on ground.</i></b> </item>
+
+       <item> <b><i>Same as in seed and seedling and vegetative stages.</i></b> </item>
+
+    </string-array>
+      <!--   // Early blight tomato-->
+
+    <string-array name="early_blight_cultural">
+        <item> <b><i>Use resistant or tolerant cultivars
+</i></b> </item>
+     <item>  <b><i>Change the nursery beds location every season,h eradicate weeds and volunteer tomato plants, fertilize properly</i></b>
+   </item>
+        <item> <b><i>Avoid planting overlapping crops in adjacent area.</i></b> </item>
+
+    </string-array>
+
+
+    <string-array name = "early_blight_chemical">
+      <item> <b><i>Spray azoxystrobin 23% SC @ 200 ml in 200 l of water/acre \n captan 50% WP @ 1000 g in 300-400 l of water/acre \n captan 75% WP @ 666.8 g in 400 l of water/acre \n copper oxy chloride 50% WP @ 1000 g in 300-400 l of water/acre \n copper sulphate 2.62% SC @ 400 ml in 200 l of water/acre \n iprodione 50% WP @ 600 g in 200 l of water/acre \n kitazin 48% EC @ 80 ml in 80 l of water/acre \n mancozeb 35% SC @ 200 g in 200 l water/acre \n mancozeb 75% WG @ 400 g in 200 l of water/acre \n pyraclostrobin 20% WG @ 150-200 g in 200 l of water/acre \n zineb 75% WP @ 600-800 g in 300-400 l of water/acre \n ziram 80% WP @ 600-800 g in 300-400 l of water/acre \n famoxadone 16.6% + cymoxanil 22.1% SC @ 200 g in 200 l of water/acre \n metiram 55% + pyraclostrobin 5% WG @ 600-700 g in 200 l of water/acre</i></b>
+ </item>
+    </string-array>
+
+
+
+    <string-array name = "late_blight_cultural">
+
+     <item>  <b><i>Field sanitation.</i></b> </item>
+      <item>  <b><i>Destruction of alternate hosts.</i></b>  </item>
+      <item>  <b><i>Provide light irrigation.</i></b>  </item>
+
+
+    </string-array>
+
+    <string-array name="late_blight_chemical">
+       <item><b><i>Spray mancozeb 35% SC @ 200 g in 200 l water/acre \n mancozen 75% WP @ 600-800 g in 300 l of water/acre \n zineb 75% WP @ 600-800 g in 300-400 l of water/acre \n famoxadone 16.6% + cymoxanil 22.1% SC @ 200 g in 200 l of water/acre \n cymoxanil 8% + mancozeb 64% WP @ 600 g in 200-300 l of water/acre \n azoxystrobin 23% SC @ 200 ml in 200 l of water/acre \n captan 50% WP @ 1000 g in 300-400 l of water/acre \n captan 75% WP @ 666.8 g in 400 l of water/acre \n copper oxy chloride 50% WP @ 1000 g in 300-400 l of water/acre \n copper sulphate 2.62% SC @ 400 ml in 200 l of water/acre \n cyazaphamid 34.5% SC @ 80 ml in 200 l of water/acre \n metrium 75% WG @ 1000 g in 200-300 l of water/acre</i></b>
+  </item>
+    </string-array>
+
+    <string-array name = "mosaic_virus_cultural">
+      <item>  <b><i>Seeds from disease free healthy plants should be selected for sowing.</i></b>         </item>
+                   <item>    <b><i>The seeds should be thoroughly rinsed and dried in shade.</i></b> </item>
+     <item><b><i>In the nursery all the infected plants should be removed carefully and destroyed. Seedlings infected with the viral disease should not be used for transplanting.</i></b>     </item>
+     <item> <b><i>Crop rotation with crops other than tobacco, potato, chilli, capsicum, brinjal, and other solanaceous crops should be undertaken</i></b>
+ </item>
+    </string-array>
+
+
+
+
+
+</resources>

@@ -1,0 +1,54 @@
+
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#map {
+    height: 900px;
+    /* The height is 300 pixels */
+    width: 300%;
+}
+
+html {
+    height: 300%;
+    margin: 0;
+}
+
+.bg {
+    background-image: url("./assets/center.png");
+    /* height: 300%; */
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btnn {
+    border: 3px solid #939723;
+    border-radius: 5px;
+    background-color: #30432C;
+    color: white;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+}
+
+.btnn:hover {
+    background-color: #212e1e;
+}
+
+.last {
+    margin-bottom: 0px;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}

@@ -1,0 +1,116 @@
+
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+
+#map {
+    /* height: 900px;
+    width: 900px; */
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    /* margin-top: 50px; */
+    /* top: 0px; */
+    /* bottom: 0px; */
+    /* right: 0px; */
+    /* left: 0px; */
+}
+
+/* Optional: Makes the sample page fill the window. */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    border: 8px solid #56754B;
+    margin: auto;
+    margin-top: 40px;
+    /* height: 553px;
+    width: 800px; */
+    width: 600px;
+    height: 414.75px;
+}
+
+.btnnn2 {
+    border: 3px solid #939723;
+    border-radius: 5px;
+    background-color: #30432C;
+    color: white;
+    text-align: center;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    /* display: block; */
+    margin-left: 50px;
+    /* transform: translateX(-50%); */
+    /* margin-bottom: 30px; */
+}
+
+.btnnn2:hover {
+    background-color: #212e1e;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #939723;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes animatebottom {
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}

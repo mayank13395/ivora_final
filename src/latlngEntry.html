@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>IVORA</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/latlngPage.css">
+
+</head>
+
+<body onload="setLatLng()" background="./assets/background.jpg" style="overflow: hidden">
+
+    <div style="text-align: center; margin:auto; display: block; margin-top: 5vh; margin-bottom: 3vh;">
+        <p style="color: #6F8466;font-size:3.5vw;word-spacing: 20px;letter-spacing: 3px;">
+            ENTER THE SENSOR LOCATIONS
+        </p>
+    </div>
+
+    <div style="width: 70%; height:70vh; overflow: auto; top:0; bottom: 0; left: 0; right: 0; margin: auto; text-align: center;" class="bg">
+        <div style="position:relative; width:100%; height:100%;">
+            <div style="position: absolute; width: 100%; top: 53%; transform: translateY(-50%);">
+                <div class="container" style="width: 100%; padding-left: 30px;">
+                    <div class="row heading">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-4">Latitude</div>
+                        <div class="col-sm-4">Longitude</div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p style="margin: 20px;"></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 1</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat1" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon1" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 2</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat2" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon2" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 3</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat3" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon3" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 4</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat4" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon4" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 5</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat5" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon5" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                    <div class="row">
+                        <div class="col-sm-3 heading2">SENSOR 6</div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLat6" type="text" class="latLong" placeholder="Latitude"  aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-4 inputDiv">
+                            <input id="sensorLon6" type="text" class="latLong" placeholder="Latitude" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <p></p>
+                </div>
+                <div style="margin-left: 20px; text-align:center">
+                    <div style="position:relative; margin: 30px; margin-left: 0px;">
+                        <button style="width: 80px" class="btnnn" id="gotoMapPage" onclick="createAnotherSensor()">+</button>
+                        <button style="width: 80px" class="btnnn" id="gotoMapPage" onclick="deleteSensor()">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top: 5vh;">
+        <div style="position:relative; transform: translateX(-32px);">
+            <button id="gotoPreviousPage" class="btnnn2 ">Back</button>
+            <button id="gotoMapPage" onclick="showMap()" class="btnnn2 ">Submit</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/latlngEntry.js"></script>
+</body>
+
+</html>
